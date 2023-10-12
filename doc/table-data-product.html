@@ -1,346 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Quản trị Admin</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
+    <!-- or -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+    />
 
-<head>
-  <title>Quản trị Admin</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Main CSS-->
-  <link rel="stylesheet" type="text/css" href="css/main.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-  <!-- or -->
-  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <!-- Font-icon css-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="../doc/js/plugins/sweetalert2.all.js"></script>
 
-  <!-- Font-icon css-->
-  <link rel="stylesheet" type="text/css"
-  
-    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"> 
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script> -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
-  <script src="../doc/js/plugins/sweetalert2.all.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
 
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-</head>
+  <body onload="time()" class="app sidebar-mini rtl">
+    <style>
+      .success-message {
+        position: fixed;
+        width: 250px;
+        top: 80px;
+        right: 20px;
+        padding: 10px;
+        background-color: #9df99d;
+        color: black;
+        border-radius: 4px;
+        display: none;
+        font-weight: bold;
+      }
+      .success-message i {
+        margin-right: 10px;
+      }
 
-<body onload="time()" class="app sidebar-mini rtl">
-  <style>
-    .success-message {
-      position: fixed;
-      width: 250px;
-      top: 80px;
-      right: 20px;
-      padding: 10px;
-      background-color: #9df99d;
-      color: black;
-      border-radius: 4px;
-      display: none;     
-      font-weight: bold;
-    }
-    .success-message i {
-      margin-right: 10px;
-    }
+      .success-them {
+        position: fixed;
+        width: 250px;
+        top: 80px;
+        right: 20px;
+        padding: 10px;
+        background-color: #9df99d;
+        color: black;
+        border-radius: 4px;
+        display: none;
+        font-weight: bold;
+      }
+      .success-them i {
+        margin-right: 10px;
+      }
+      .success-sua {
+        position: fixed;
+        width: 250px;
+        top: 80px;
+        right: 20px;
+        padding: 10px;
+        background-color: #9df99d;
+        color: black;
+        border-radius: 4px;
+        display: none;
+        font-weight: bold;
+      }
+      .success-sua i {
+        margin-right: 10px;
+      }
+      #sampleTable.table {
+        margin-left: 0;
+      }
+      .actions {
+        text-align: center;
+      }
+      .actions button {
+        margin-right: 7px;
+      }
+      #sn_right {
+        text-align: right;
+      }
+      #gia_right {
+        text-align: right;
+      }
+      .swal2-popup {
+        background-color: #ffffff;
+        max-height: 190px;
+        border-radius: 10px;
+      }
+      .swal2-close {
+        color: black;
+        border: none;
+      }
+      .swal2-title {
+        color: black;
+        font-size: 24px;
+        padding: 0px;
+        margin: 0px;
+        margin-top: -25px;
+      }
+      .swal2-close:hover {
+        color: black;
+      }
+      .swal2-actions {
+        /*flex-direction: row-reverse !important;  */
+        justify-content: flex-end;
+        margin-top: 20px;
+        margin-right: 25px;
+      }
+      .swal2-actions .swal2-confirm {
+        height: 36px;
+        width: 77px;
+        font-size: 14px;
+        margin-right: 10px;
+        text-align: center;
+        color: black;
+        font-weight: bold;
+        background: #a6ecab;
+        border-radius: 5px;
+        box-shadow: none !important;
+        outline: none !important;
+      }
+      .swal2-actions .swal2-cancel {
+        height: 36px;
+        width: 77px;
+        font-size: 14px;
+        text-align: center;
+        color: black;
+        font-weight: bold;
+        background: #ffc5c5;
+        border-radius: 5px;
+        box-shadow: none !important;
+        outline: none !important;
+      }
 
-    .success-them {
-      position: fixed;
-      width: 250px;
-      top: 80px;
-      right: 20px;
-      padding: 10px;
-      background-color: #9df99d;
-      color: black;
-      border-radius: 4px;
-      display: none;
-      font-weight: bold;
-     
-    }
-    .success-them i {
-      margin-right: 10px;
-    }
-    .success-sua {
-      position: fixed;
-      width: 250px;
-      top: 80px;
-      right: 20px;
-      padding: 10px;
-      background-color: #9df99d;
-      color: black;
-      border-radius: 4px;
-      display: none;
-      font-weight: bold;
-     
-    }
-    .success-sua i {
-      margin-right: 10px;
-    }
-    #sampleTable.table {
-      margin-left: 0;
-    }
-    .actions  {
-      text-align: center;
-    }
-    .actions button {
-      margin-right: 7px;
-    }
-    #sn_right {
-      text-align: right;
-    }
-    #gia_right {
-      text-align: right;
-    }
-    .swal2-popup {
-      background-color: #ffffff;
-      max-height: 190px;
-      border-radius: 10px;
-    }
-    .swal2-close {
-      color: black;
-      border: none;
-    }
-    .swal2-title {
-      color: black;
-      font-size: 24px;
-      padding: 0px;
-      margin: 0px;
-      margin-top: -25px;
-    }
-    .swal2-close:hover {
-      color: black;
-    }
-    .swal2-actions {
-      /*flex-direction: row-reverse !important;  */
-      justify-content: flex-end; 
-      margin-top: 20px;
-      margin-right: 25px;
-
-    }
-    .swal2-actions .swal2-confirm {
-      height: 36px;
-      width: 77px;
-      font-size: 14px;  
-      margin-right: 10px;
-      text-align: center;
-      color: black;
-      font-weight: bold;
-      background: #A6ECAB;
-      border-radius: 5px;
-      box-shadow: none !important;
-      outline: none !important;
-    }
-    .swal2-actions .swal2-cancel {
-      height: 36px;
-      width: 77px;
-      font-size: 14px;  
-      text-align: center;
-      color: black;
-      font-weight: bold;
-      background: #FFC5C5;
-      border-radius: 5px;
-      box-shadow: none !important;
-      outline: none !important;
-     
-    }
-    
-    .swal2-close:focus {
-      box-shadow: none !important;
-      outline: none !important;
-    }
-   
-
-  </style>
-  <!-- Navbar-->
-  <header class="app-header">
-    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
-      aria-label="Hide Sidebar"></a>
-    <!-- Navbar Right Menu-->
-    <ul class="app-nav">
-
-
-      <!-- User Menu-->
-      <li><a class="app-nav__item" href="/HTML/login.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
-
-      </li>
-    </ul>
-  </header>
-  <!-- Sidebar menu-->
-  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-  <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/LOGO.png" width="50px"
-        alt="User Image">
-      <div>
-        <p class="app-sidebar__user-name"><b>HMU</b></p>
-        <p class="app-sidebar__user-designation">Chào mừng bạn đến HMU Travel</p>
-      </div>
-    </div>
-    <hr>
-    <ul class="app-menu">
-      <li><a class="app-menu__item " href="table-data-table.html"><i class='app-menu__icon fa-solid fa-users'></i>
-          <span class="app-menu__label">Quản lý nhân viên</span></a></li>
-          <!-- <i class='app-menu__icon bx bx-purchase-tag-alt'></i> -->
-      <li><a class="app-menu__item active " href="table-data-product.html"><i class="app-menu__icon fa-solid fa-location-dot" ></i>
-        <span class="app-menu__label">Quản lý tour</span></a>
-      </li>
-      
-      <li><a class="app-menu__item" href="quan-ly-bao-cao.html"><i
-            class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Thống kê doanh thu</span></a>
-      </li>
-     
-    </ul>
-  </aside>
-  <main class="app-content">
-    <div class="app-title">
-      <ul class="app-breadcrumb breadcrumb side">
-        <li class="breadcrumb-item active"><a href="#"><b>Danh sách tour</b></a></li>
+      .swal2-close:focus {
+        box-shadow: none !important;
+        outline: none !important;
+      }
+    </style>
+    <!-- Navbar-->
+    <header class="app-header">
+      <!-- Sidebar toggle button--><a
+        class="app-sidebar__toggle"
+        href="#"
+        data-toggle="sidebar"
+        aria-label="Hide Sidebar"
+      ></a>
+      <!-- Navbar Right Menu-->
+      <ul class="app-nav">
+        <!-- User Menu-->
+        <li>
+          <a class="app-nav__item" href="/HTML/login.html"
+            ><i class="bx bx-log-out bx-rotate-180"></i>
+          </a>
+        </li>
       </ul>
-      <div id="clock"></div>
-    </div>
+    </header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+      <div class="app-sidebar__user">
+        <img
+          class="app-sidebar__user-avatar"
+          src="/images/LOGO.png"
+          width="50px"
+          alt="User Image"
+        />
+        <div>
+          <p class="app-sidebar__user-name"><b>ADLV</b></p>
+          <p class="app-sidebar__user-designation">
+            Chào mừng bạn đến ADLV Travel
+          </p>
+        </div>
+      </div>
+      <hr />
+      <ul class="app-menu">
+        <li>
+          <a class="app-menu__item" href="table-data-table.html"
+            ><i class="app-menu__icon fa-solid fa-users"></i>
+            <span class="app-menu__label">Quản lý nhân viên</span></a
+          >
+        </li>
+        <!-- <i class='app-menu__icon bx bx-purchase-tag-alt'></i> -->
+        <li>
+          <a class="app-menu__item active" href="table-data-product.html"
+            ><i class="app-menu__icon fa-solid fa-location-dot"></i>
+            <span class="app-menu__label">Quản lý tour</span></a
+          >
+        </li>
 
-    <div class="row">
-      <div class="col-md-12">
-        <div class="tile">
-          <div class="tile-body">
-            <div class="row element-button">
-              <div class="col-sm-2">
+        <li>
+          <a class="app-menu__item" href="quan-ly-bao-cao.html"
+            ><i class="app-menu__icon bx bx-pie-chart-alt-2"></i
+            ><span class="app-menu__label">Thống kê doanh thu</span></a
+          >
+        </li>
+      </ul>
+    </aside>
+    <main class="app-content">
+      <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb side">
+          <li class="breadcrumb-item active">
+            <a href="#"><b>Danh sách tour</b></a>
+          </li>
+        </ul>
+        <div id="clock"></div>
+      </div>
 
-                <a class="btn btn-add btn-sm" href="form-add-san-pham.html" title="Thêm" style="font-weight: bold; color:black"><i class="fas fa-plus"></i>
-                  Tạo mới tour</a>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+              <div class="row element-button">
+                <div class="col-sm-2">
+                  <a
+                    class="btn btn-add btn-sm"
+                    href="form-add-san-pham.html"
+                    title="Thêm"
+                    style="font-weight: bold; color: black"
+                    ><i class="fas fa-plus"></i> Tạo mới tour</a
+                  >
+                </div>
               </div>
-   
+              <table
+                class="table table-hover table-bordered js-copytextarea"
+                cellpadding="0"
+                cellspacing="0"
+                border="0"
+                id="sampleTable"
+              >
+                <thead>
+                  <tr>
+                    <th style="text-align: center" width="10">
+                      <input type="checkbox" id="all" />
+                    </th>
+                    <th style="text-align: center" width="70">Mã tour</th>
+                    <th style="text-align: center" width="280">Tên tour</th>
+                    <th style="text-align: center" width="130">Địa điểm</th>
+                    <th style="text-align: center" width="155">Lịch trình</th>
+                    <th style="text-align: center" width="100">Giá tour</th>
+                    <th style="text-align: center" width="70">Số người</th>
+                    <th style="text-align: center" width="90">Tính năng</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
             </div>
-            <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" 
-              id="sampleTable" >
-              <thead>
-                <tr>
-                  <th style="text-align: center;" width="10"><input type="checkbox" id="all"></th>
-                  <th style="text-align: center;" width="70">Mã tour</th>
-                  <th style="text-align: center;" width="280">Tên tour</th>
-                  <th style="text-align: center;" width="130">Địa điểm</th>
-                  <th style="text-align: center;" width="155">Lịch trình</th>
-                  <th style="text-align: center;"  width="100">Giá tour</th>
-                  <th style="text-align: center;" width="70">Số người </th>
-                  <th style="text-align: center;" width="90">Tính năng</th>
-                </tr>
-              </thead>
-              <tbody>
-                    
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
-    </div>
-    <div class="success-message" id="successMessage">
-      <i class="fa-solid fa-check"></i> Bạn đã xóa tour thành công
-    </div>
-    <div id="success-message" class="success-sua"><i class="fa-solid fa-check"></i> Bạn đã sửa tour thành công</div>
-    <!-- <div id="successMessage" class="success-message"><i class="fas fa-plus"></i></div> -->
-    <div id="success" class="success-them"><i class="fa-solid fa-check"></i> Bạn đã thêm tour thành công</div>
-  </main>
+      <div class="success-message" id="successMessage">
+        <i class="fa-solid fa-check"></i> Bạn đã xóa tour thành công
+      </div>
+      <div id="success-message" class="success-sua">
+        <i class="fa-solid fa-check"></i> Bạn đã sửa tour thành công
+      </div>
+      <!-- <div id="successMessage" class="success-message"><i class="fas fa-plus"></i></div> -->
+      <div id="success" class="success-them">
+        <i class="fa-solid fa-check"></i> Bạn đã thêm tour thành công
+      </div>
+    </main>
 
-  <!--
+    <!--
   MODAL
 -->
-<!-- disabled  -->
-  <!-- Essential javascripts for application to work-->
-  <script src="js/jquery-3.2.1.min.js"></script>
-  <!-- <script src="./js/plugins/jquery-3.7.0.min.map"> </script> -->
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
-  <script src="src/jquery.table2excel.js"></script>
-  <script src="js/main.js"></script>
-  <!-- The javascript plugin to display page loading on top-->
-  <script src="js/plugins/pace.min.js"></script>
-  <!-- Page specific javascripts-->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script> -->
-  <!-- Data table plugin-->
-  <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
-  <!-- <script type="text/javascript">$('#sampleTable').DataTable();</script> -->
+    <!-- disabled  -->
+    <!-- Essential javascripts for application to work-->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <!-- <script src="./js/plugins/jquery-3.7.0.min.map"> </script> -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+    <script src="src/jquery.table2excel.js"></script>
+    <script src="js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script> -->
+    <!-- Data table plugin-->
+    <script
+      type="text/javascript"
+      src="js/plugins/jquery.dataTables.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/plugins/dataTables.bootstrap.min.js"
+    ></script>
+    <!-- <script type="text/javascript">$('#sampleTable').DataTable();</script> -->
 
- 
-  <script>
-    
-    // Chức Năng Xóa
-    function deleteRow(r) {
-      var i = r.parentNode.parentNode.rowIndex;
-      tours.splice(i-1, 1);
-      localStorage.setItem('tours', JSON.stringify(tours));
-      document.getElementById("sampleTable").deleteRow(i);
-   }
+    <script>
+      // Chức Năng Xóa
+      function deleteRow(r) {
+        var i = r.parentNode.parentNode.rowIndex;
+        tours.splice(i - 1, 1);
+        localStorage.setItem("tours", JSON.stringify(tours));
+        document.getElementById("sampleTable").deleteRow(i);
+      }
 
-        jQuery(function () {
-            jQuery(".trash").click(function () {
-              Swal.fire({
-                title: 'THÔNG BÁO',
-                html: `<span style="color: black; font-size:14px; margin-top:0px"> <i class="fa-regular fa-circle-question" style="font-size:20px" ></i> Bạn có chắc chắn là muốn xóa tour này?</span>`,
-                width: 400,
-                showCloseButton: true,
-                showCancelButton: true,
-                focusConfirm: true,
-                confirmButtonText: 'Đồng ý',
-                cancelButtonText: 'Hủy bỏ',
-                allowEnterKey: true,
-                allowOutsideClick: false,
-                
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  deleteRow(this);     
-                        document.querySelector('.success-message').style.display = 'block';  
-                       // document.getElementById("successMessage").innerText = "Bạn đã xóa tour thành công !";
-                       // document.getElementById("successMessage").style.display = "block";  
-                        setTimeout(function() {
-                          document.getElementById("successMessage").style.display = "none";        
-                        }, 2000);
-                }  
-              })
-            });
+      jQuery(function () {
+        jQuery(".trash").click(function () {
+          Swal.fire({
+            title: "THÔNG BÁO",
+            html: `<span style="color: black; font-size:14px; margin-top:0px"> <i class="fa-regular fa-circle-question" style="font-size:20px" ></i> Bạn có chắc chắn là muốn xóa tour này?</span>`,
+            width: 400,
+            showCloseButton: true,
+            showCancelButton: true,
+            focusConfirm: true,
+            confirmButtonText: "Đồng ý",
+            cancelButtonText: "Hủy bỏ",
+            allowEnterKey: true,
+            allowOutsideClick: false,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              deleteRow(this);
+              document.querySelector(".success-message").style.display =
+                "block";
+              // document.getElementById("successMessage").innerText = "Bạn đã xóa tour thành công !";
+              // document.getElementById("successMessage").style.display = "block";
+              setTimeout(function () {
+                document.getElementById("successMessage").style.display =
+                  "none";
+              }, 2000);
+            }
+          });
         });
-   
-         //Thêm
- 
-          let tours = JSON.parse(localStorage.getItem('tours')) || [];
-          if(tours.length == 0){
-            tours.push({
-              ma: "Tour1",
-              ten: "Tour Đà Lạt - Nha Trang trọn gói 2 ngày 1 đêm",
-              diadiem: "Nha Trang",
-              lichtrinh: "1/7/2022-4/7/2022",
-              gia: "5500000",
-              songuoi: "3",
-            })
-      
-            tours.push({
-              ma: "Tour2",
-              ten: "Tour Hà Nội - Pleiku - Buôn Mê Thuột trọn gói 3 ngày 2 đêm",
-              diadiem: "Tây Nguyên",
-              lichtrinh: "1/7/2022-3/7/2022",
-              gia: "5600000",
-              songuoi: "1",
-            })
-      
-            tours.push({
-              ma: "Tour3",
-              ten: "Tour Hà Nội - Sài Gòn - Mũi Né trọn gói 4 ngày 3 đêm",
-              diadiem: "Bình Thuận",
-              lichtrinh: "1/7/2022-3/7/2022",
-              gia: "1760000",
-              songuoi: "4",
-            })
-      
-            
-            localStorage.setItem('tours', JSON.stringify(tours));
-          }
-          let tbodyElement = document.querySelector('#sampleTable tbody');
-          let textHtml = ``;
-          //tbodyElement.innerHTML = '';
-          for (let i = 0; i < tours.length; i++) {
-         //let tour = tours[i];
-              let text = `<tr>
+      });
+
+      //Thêm
+
+      let tours = JSON.parse(localStorage.getItem("tours")) || [];
+      if (tours.length == 0) {
+        tours.push({
+          ma: "Tour1",
+          ten: "Tour Đà Lạt - Nha Trang trọn gói 2 ngày 1 đêm",
+          diadiem: "Nha Trang",
+          lichtrinh: "1/7/2022-4/7/2022",
+          gia: "5500000",
+          songuoi: "3",
+        });
+
+        tours.push({
+          ma: "Tour2",
+          ten: "Tour Hà Nội - Pleiku - Buôn Mê Thuột trọn gói 3 ngày 2 đêm",
+          diadiem: "Tây Nguyên",
+          lichtrinh: "1/7/2022-3/7/2022",
+          gia: "5600000",
+          songuoi: "1",
+        });
+
+        tours.push({
+          ma: "Tour3",
+          ten: "Tour Hà Nội - Sài Gòn - Mũi Né trọn gói 4 ngày 3 đêm",
+          diadiem: "Bình Thuận",
+          lichtrinh: "1/7/2022-3/7/2022",
+          gia: "1760000",
+          songuoi: "4",
+        });
+
+        localStorage.setItem("tours", JSON.stringify(tours));
+      }
+      let tbodyElement = document.querySelector("#sampleTable tbody");
+      let textHtml = ``;
+      //tbodyElement.innerHTML = '';
+      for (let i = 0; i < tours.length; i++) {
+        //let tour = tours[i];
+        let text = `<tr>
                 <td  style="text-align: center;" width="10"><input type="checkbox" name="check4" value="4" ></td>
                 <td width="50">${tours[i].ma}</td>
                 <td width="280">${tours[i].ten}</td>
@@ -360,116 +410,104 @@
                     <i class="fas fa-trash-alt"></i>
                   </button>
                 </td>
-              </tr>`
-              textHtml +=text;
-       }
-       tbodyElement.innerHTML = tbodyElement.innerHTML + textHtml
-       const params = new URLSearchParams(window.location.search); 
-       const success = params.get('success');
-       
-       if (success) {
-         document.querySelector('.success-them').style.display = 'block';
-         
-         setTimeout(function() {
-           document.getElementById("success").style.display = "none"; 
-         }, 2000);
-       }
-
-      // const params = new URLSearchParams(window.location.search); 
-       const successMessage = params.get('successMessage ');
-       
-       if (successMessage) {
-         document.querySelector('.success-sua').style.display = 'block';
-         
-         setTimeout(function() {
-           document.getElementById("success-message").style.display = "none"; 
-         }, 2000);
-       }
-
-
-   
-  </script>
-
-  <!-- tìm kiếm -->
-  <script type="text/javascript">$('#sampleTable').DataTable({
-    columnDefs: [
-            { targets: [2], searchable: true},
-            { targets: [0], searchable: false},
-            { targets: [1], searchable: true},
-            { targets: [3], searchable: true},
-            { targets: [4], searchable: true},
-            { targets: [5], searchable: true},
-            { targets: [6], searchable: true},
-            { targets: [7], searchable: false},
-        ]
-  });
-
-  // Chức Năng Sửa
-  $(".edit").click(function() {
-
-      var tourInfo = {
-
-        ma : $(this).data("ma"),
-        ten: $(this).data("ten"), 
-        diadiem: $(this).data("diadiem"),  
-        lichtrinh: $(this).data("lichtrinh"),
-        gia: $(this).data("gia"),
-        songuoi: $(this).data("songuoi")   
-      };
-      console.log(tourInfo)
-      localStorage.setItem("selectedTour", JSON.stringify(tourInfo));  
-      location.href = "./form-edit-sanpham.html"
-    });
-
-     </script>
-
-     <script>
-              //Thời Gian
-    function time() {
-      var today = new Date();
-      var weekday = new Array(7);
-      weekday[0] = "Chủ Nhật";
-      weekday[1] = "Thứ Hai";
-      weekday[2] = "Thứ Ba";
-      weekday[3] = "Thứ Tư";
-      weekday[4] = "Thứ Năm";
-      weekday[5] = "Thứ Sáu";
-      weekday[6] = "Thứ Bảy";
-      var day = weekday[today.getDay()];
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1;
-      var yyyy = today.getFullYear();
-      var h = today.getHours();
-      var m = today.getMinutes();
-      var s = today.getSeconds();
-      m = checkTime(m);
-      s = checkTime(s);
-      nowTime = h + " giờ " + m + " phút " + s + " giây";
-      if (dd < 10) {
-        dd = '0' + dd
+              </tr>`;
+        textHtml += text;
       }
-      if (mm < 10) {
-        mm = '0' + mm
-      }
-      today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-      tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-        '</span>';
-      document.getElementById("clock").innerHTML = tmp;
-      clocktime = setTimeout("time()", "1000", "Javascript");
+      tbodyElement.innerHTML = tbodyElement.innerHTML + textHtml;
+      const params = new URLSearchParams(window.location.search);
+      const success = params.get("success");
 
-      function checkTime(i) {
-        if (i < 10) {
-          i = "0" + i;
+      if (success) {
+        document.querySelector(".success-them").style.display = "block";
+
+        setTimeout(function () {
+          document.getElementById("success").style.display = "none";
+        }, 2000);
+      }
+
+      // const params = new URLSearchParams(window.location.search);
+      const successMessage = params.get("successMessage ");
+
+      if (successMessage) {
+        document.querySelector(".success-sua").style.display = "block";
+
+        setTimeout(function () {
+          document.getElementById("success-message").style.display = "none";
+        }, 2000);
+      }
+    </script>
+
+    <!-- tìm kiếm -->
+    <script type="text/javascript">
+      $("#sampleTable").DataTable({
+        columnDefs: [
+          { targets: [2], searchable: true },
+          { targets: [0], searchable: false },
+          { targets: [1], searchable: true },
+          { targets: [3], searchable: true },
+          { targets: [4], searchable: true },
+          { targets: [5], searchable: true },
+          { targets: [6], searchable: true },
+          { targets: [7], searchable: false },
+        ],
+      });
+
+      // Chức Năng Sửa
+      $(".edit").click(function () {
+        var tourInfo = {
+          ma: $(this).data("ma"),
+          ten: $(this).data("ten"),
+          diadiem: $(this).data("diadiem"),
+          lichtrinh: $(this).data("lichtrinh"),
+          gia: $(this).data("gia"),
+          songuoi: $(this).data("songuoi"),
+        };
+        console.log(tourInfo);
+        localStorage.setItem("selectedTour", JSON.stringify(tourInfo));
+        location.href = "./form-edit-sanpham.html";
+      });
+    </script>
+
+    <script>
+      //Thời Gian
+      function time() {
+        var today = new Date();
+        var weekday = new Array(7);
+        weekday[0] = "Chủ Nhật";
+        weekday[1] = "Thứ Hai";
+        weekday[2] = "Thứ Ba";
+        weekday[3] = "Thứ Tư";
+        weekday[4] = "Thứ Năm";
+        weekday[5] = "Thứ Sáu";
+        weekday[6] = "Thứ Bảy";
+        var day = weekday[today.getDay()];
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        nowTime = h + " giờ " + m + " phút " + s + " giây";
+        if (dd < 10) {
+          dd = "0" + dd;
         }
-        return i;
+        if (mm < 10) {
+          mm = "0" + mm;
+        }
+        today = day + ", " + dd + "/" + mm + "/" + yyyy;
+        tmp = '<span class="date"> ' + today + " - " + nowTime + "</span>";
+        document.getElementById("clock").innerHTML = tmp;
+        clocktime = setTimeout("time()", "1000", "Javascript");
+
+        function checkTime(i) {
+          if (i < 10) {
+            i = "0" + i;
+          }
+          return i;
+        }
       }
-    }
-     </script>
-
-
-
-  
-
-</body>
-
+    </script>
+  </body>
 </html>
