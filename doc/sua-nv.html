@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Quản trị Admin</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Main CSS-->
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <!-- Font-icon css-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <!-- or -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+  <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+
+<body class="app sidebar-mini rtl">
+
+  <style>
+  
+    .btn-save {
+      background-color: rgb(166 236 171);
+      color: rgb(1 123 10);
+      /* width: 100px; */
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .btn-cancel {
+      background-color: rgb(255 197 197);
+      color: rgb(190, 40, 40);
+      /* width: 100px; */
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .success-message {
+      position: fixed;
+      width: 290px;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px;
+      background-color: #d7f5d7;
+      color: black;
+      border-radius: 4px;
+      display: none;
+    }
+
+    .success-sua {
+      position: fixed;
+      width: 250px;
+      top: 80px;
+      right: 20px;
+      padding: 10px;
+      background-color: #9df99d;
+      color: black;
+      border-radius: 4px;
+      display: none;
+      font-weight: bold;
+
+    }
+
+    .success-sua i {
+      margin-right: 10px;
+    }
+
+    #sampleTable.table {
+      margin-left: 0;
+    }
+
+    .success-message {
+      position: fixed;
+      width: 250px;
+      top: 80px;
+      right: 20px;
+      padding: 10px;
+      background-color: #9df99d;
+      color: black;
+      border-radius: 4px;
+      display: none;
+      font-weight: bold;
+    }
+
+    .success-message i {
+      margin-right: 10px;
+    }
+
+    .form-group.col-md-6 {
+      display: flex;
+      align-items: center;
+      margin-bottom: 35px;
+    }
+
+    .form-group {
+      position: relative;
+      /* container cần có position: relative */
+    }
+
+    .form-group input {
+      margin-bottom: 0;
+      margin-left: 50px;
+      width: 350px;
+    }
+
+    .form-group .abc {
+      position: absolute;
+      bottom: -22px;
+      left: 170px;
+      font-size: 13px;
+      color: red;
+    }
+
+    .control-label {
+      white-space: nowrap;
+      margin-left: 20px;
+
+
+    }
+  </style>
+  <header class="app-header">
+    <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+
+    <ul class="app-nav">
+      <li><a class="app-nav__item" href="/HTML/login.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+
+      </li>
+    </ul>
+  </header>
+  <!-- Sidebar menu-->
+  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+  <aside class="app-sidebar">
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/LOGO.png" width="50px"
+        alt="User Image">
+      <div>
+        <p class="app-sidebar__user-name"><b>HMU</b></p>
+        <p class="app-sidebar__user-designation">Chào mừng bạn đến HMU Travel</p>
+      </div>
+    </div>
+    <hr>
+    <ul class="app-menu">
+
+      <li><a class="app-menu__item active" href="table-data-table.html"><i class='app-menu__icon fa-solid fa-users'></i>
+          <span class="app-menu__label">Quản lý nhân viên</span></a></li>
+      <!-- <i class='app-menu__icon bx bx-purchase-tag-alt'></i> -->
+      <li><a class="app-menu__item  " href="table-data-product.html"><i
+            class="app-menu__icon fa-solid fa-location-dot"></i>
+          <span class="app-menu__label">Quản lý tour</span></a>
+      </li>
+
+      <li><a class="app-menu__item" href="quan-ly-bao-cao.html"><i
+            class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Thống kê doanh thu</span></a>
+      </li>
+    </ul>
+  </aside>
+  <main class="app-content">
+    <div class="app-title">
+      <ul class="app-breadcrumb breadcrumb">
+        <li class="breadcrumb-item">Danh sách nhân viên </li>
+        <li class="breadcrumb-item"><a href="#">Sửa thông tin nhân viên</a></li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tile">
+          <h3 class="tile-title">Sửa thông tin nhân viên</h3>
+          <div class="tile-body" style="height: 300px;">
+            <!-- <div class="row element-button">
+            </div> -->
+            <form class="row">
+              <div class="form-group col-md-6" style="display: flex; align-items: center;">
+                <label class="control-label">Mã nhân viên:</label>
+                <input class="form-control" type="text" id="input-ma" placeholder=""
+                  style="margin-left: 45px ;width: 350px;">
+                <div id="errorMa" class="abc text-danger"></div>
+              </div>
+              <div class="form-group col-md-6" style="padding-left: 35px">
+                <label class="control-label">Họ và tên: </label>
+                <input class="form-control" type="text" required id="input-ten">
+                <div id="errorTen" class="abc text-danger" style="left: 170px;"></div>
+
+              </div>
+              <div class="form-group col-md-6">
+                <label class="control-label">Địa chỉ email: </label>
+                <input class="form-control" type="text" required id="input-mail">
+                <div id="errorMail" class="abc text-danger"></div>
+
+              </div>
+              <div class="form-group col-md-6" style="padding-left: 35px;">
+                <label class="control-label">Địa chỉ: </label>
+                <input class="form-control" type="text" required id="input-diachi" style="margin-left: 69px !important">
+                <div id="errorDiachi" class="abc text-danger" style="left: 170px;"></div>
+
+              </div>
+              <div class="form-group  col-md-6">
+                <label class="control-label">Số điện thoại: </label>
+                <input class="form-control" type="number" required id="input-sdt" style="margin-left: 48px">
+                <div id="errorSDT" class="abc text-danger"></div>
+
+              </div>
+              <div class="form-group col-md-6" style="padding-left: 35px">
+                <label class="control-label">Ngày sinh: </label>
+                <input class="form-control" type="date" id="input-ngaysinh">
+                <div id="errorNgaysinh" class="abc text-danger" style="left: 170px;"></div>
+
+              </div>
+              <div class="form-group col-md-6" style="display: flex; align-items: center;">
+                <label class="control-label">Giới tính: </label>
+                <div>
+                  <select class="form-control" required id="input-gioitinh" style="margin-left: 77px ;width: 350px;">
+                    <option>--Chọn giới tính--</option>
+                    <option>Nam</option>
+                    <option>Nữ</option>
+                  </select>
+                  <div id="errorGioitinh" class="abc text-danger"></div>
+                </div>
+              </div>
+
+              <div class="form-group col-md-6" style="display: flex; align-items: center;">
+                <label class="control-label" style="padding-left:17px">Chức vụ: </label>
+                <div>
+                  <select class="form-control" required id="input-chucvu" style="margin-left: 65px ;width: 350px;">
+                    <option>--Chọn chức vụ--</option>
+                    <option>Quản lý</option>
+                    <option>Nhân viên</option>
+                  </select>
+                  <div id="errorChucvu" class="abc text-danger"></div>
+                </div>
+              </div>
+
+
+          </div>
+          <div>
+            <div>
+              <div class="button-container" style="text-align: right; margin-top: 20px;">
+                <button class="btn btn-save" style="margin-right: 0; color:black" type="button" value="Submit"
+                  onclick="return checkAll()">
+                  Lưu lại
+                </button>
+                <a class="btn btn-cancel " style="margin-right: 50px;margin-left: 20px;color:black"
+                  href="table-data-table.html">Hủy bỏ</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="success-message" class="success-sua"><i class="fa-solid fa-check"></i> Sửa nhân viên thành công</div>
+  </main>
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+  <!-- The javascript plugin to display page loading on top-->
+  <script src="js/plugins/pace.min.js"></script>
+
+  <script>
+    //let id = localStorage.getItem("selectedTourId");
+    // let tours = JSON.parse(localStorage.getItem("tours"));
+    //let tour = tours.find(item => item.ma == id);
+    var staffInfo = JSON.parse(localStorage.getItem("selectedStaff"));
+    if (staffInfo) {
+      console.log(staffInfo);
+      document.getElementById("input-ma").value = staffInfo.ma;
+      document.getElementById("input-ten").value = staffInfo.ten;
+      document.getElementById("input-diachi").value = staffInfo.diachi;
+      document.getElementById("input-ngaysinh").value = staffInfo.ngaysinh;
+      document.getElementById("input-gioitinh").value = staffInfo.gioitinh;
+      document.getElementById("input-mail").value = staffInfo.mail;
+      document.getElementById("input-sdt").value = staffInfo.sdt;
+      document.getElementById("input-chucvu").value = staffInfo.chucvu;
+    }
+    //var staffInfo = JSON.parse(localStorage.getItem("selectedTour"));
+
+
+    //Sự kiện khi ấn nút save
+    function checkAll() {
+      let ma = document.getElementById('input-ma').value;
+      let ten = document.getElementById('input-ten').value;
+      let diachi = document.getElementById('input-diachi').value;
+      let ngaysinh = document.getElementById('input-ngaysinh').value;
+      let gioitinh = document.getElementById('input-gioitinh').value;
+      let mail = document.getElementById('input-mail').value;
+      let sdt = document.getElementById('input-sdt').value;
+      let chucvu = document.getElementById('input-chucvu').value;
+      let isError = false;
+      if (ma.trim() === '') {
+        document.getElementById('errorMa').innerHTML = 'Mã không được để trống.';
+        isError = true;
+      } else {
+        document.getElementById('errorMa').innerHTML = '';
+      }
+
+      if (ten.trim() === '') {
+        document.getElementById('errorTen').innerHTML = 'Tên không được để trống';
+        isError = true;
+      } else {
+        document.getElementById('errorTen').innerHTML = '';
+      }
+
+      if (mail.trim() === '') {
+        document.getElementById('errorMail').innerHTML = 'Email không được để trống.';
+        isError = true;
+      }
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) {
+        document.getElementById('errorMail').innerHTML = 'Nhập sai định dạng thông tin <br>';
+        return false;
+      }
+      else {
+        document.getElementById('errorMail').innerHTML = '';
+      }
+
+      if (diachi.trim() === '') {
+        document.getElementById('errorDiachi').innerHTML = 'Địa chỉ không được để trống';
+        isError = true;
+      } else {
+        document.getElementById('errorDiachi').innerHTML = '';
+      }
+
+      if (sdt.trim() === '') {
+        document.getElementById('errorSDT').innerHTML = 'SDT không được để trống.';
+        isError = true;
+      } else if (!/^\d{10}$/.test(sdt)) {
+        document.getElementById('errorSDT').innerHTML = 'Nhập sai định dạng thông tin <br>';
+        return false;
+      }
+      else {
+        document.getElementById('errorSDT').innerHTML = '';
+      }
+      if (ngaysinh.trim() === '') {
+        document.getElementById('errorNgaysinh').innerHTML = 'Ngày sinh không được để trống.';
+        isError = true;
+      } else {
+        document.getElementById('errorNgaysinh').innerHTML = '';
+      }
+      if (gioitinh.trim() === '--Chọn giới tính--') {
+        document.getElementById('errorGioitinh').innerHTML = 'Giới tính không được để trống.';
+        isError = true;
+      }
+      else {
+        document.getElementById('errorGioitinh').innerHTML = '';
+      }
+      if (chucvu.trim() === '--Chọn chức vụ--') {
+        document.getElementById('errorChucvu').innerHTML = 'Chức vụ không được để trống.';
+        isError = true;
+      }
+      else {
+        document.getElementById('errorChucvu').innerHTML = '';
+      }
+
+      if (isError) {
+        return false;
+      }
+
+
+      staffInfo.ma = ma;
+      staffInfo.ten = ten;
+      staffInfo.diachi = diachi;
+      staffInfo.ngaysinh = ngaysinh;
+      staffInfo.gioitinh = gioitinh;
+      staffInfo.mail = mail;
+      staffInfo.sdt = sdt;
+      staffInfo.chucvu = chucvu;
+
+      var staffs = JSON.parse(localStorage.getItem('staffs')) || [];
+      for (var i = 0; i < staffs.length; i++) {
+        if (staffs[i].ma === staffInfo.ma) {
+          //  staffs[i].ma= staffInfo.ma;
+          staffs[i].ten = staffInfo.ten;
+          staffs[i].diachi = staffInfo.diachi;
+          staffs[i].ngaysinh = staffInfo.ngaysinh;
+          staffs[i].gioitinh = staffInfo.gioitinh;
+          staffs[i].mail = staffInfo.mail;
+          staffs[i].sdt = staffInfo.sdt;
+          staffs[i].chucvu = staffInfo.chucvu;
+          break;
+        }
+      }
+
+      localStorage.setItem('staffs', JSON.stringify(staffs));
+      localStorage.setItem('selectedStaff', JSON.stringify(staffInfo));
+      console.log('Thành công! Đã sửa nhân viên:', staffInfo);
+      localStorage.setItem('updateNV', JSON.stringify(1));
+      window.location.href = './table-data-table.html';
+      return true;
+
+
+
+
+
+
+      /*localStorage.setItem('staffs', JSON.stringify(staffs));
+      localStorage.setItem('selectedstaff', JSON.stringify(staffInfo));
+      console.log('Thành công! Đã sửa khách hàng:', staffInfo);
+      localStorage.setItem('updateKH', JSON.stringify(1));
+      window.location.href = './table-data-khach.html';
+
+      return true;*/
+
+    }
+
+  </script>
+
+
+
+</body>
+
+</html>

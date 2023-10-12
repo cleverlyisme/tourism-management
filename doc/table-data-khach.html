@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <title>Danh sách khách hàng | Quản trị Admin</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Main CSS-->
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <!-- or -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <!-- Font-icon css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
+  <link rel="stylesheet" type="text/css"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+</head>
+<style>
+  .swal2-popup.swal2-action {
+    margin-top: 50px;
+
+  }
+
+  #sdt_right {
+    text-align: right;
+  }
+
+  /* DDDDDD */
+  #notifi-sucess {
+    background-color: #9df99d;
+    position: fixed;
+    top: -85px;
+    right: -100px;
+    transform: translateX(-50%);
+    color: black;
+    padding: 10px;
+    transition: bottom 0.7s ease-in-out;
+    z-index: 100;
+  }
+
+  #notifi-sucess.show {
+    top: 70px;
+  }
+
+  .hide {
+    transition: bottom 0.4s ease-in-out;
+    display: none;
+  }
+  #notifi-sucess1 {
+    background-color: #9df99d;
+    position: fixed;
+    top: -85px;
+    right: -130px;
+    transform: translateX(-50%);
+    color: black;
+    padding: 10px;
+    transition: bottom 0.7s ease-in-out;
+    z-index: 100;
+  }
+
+  #notifi-sucess1.show {
+    top: 70px;
+  }
+
+  .hide {
+    transition: bottom 0.4s ease-in-out;
+    display: none;
+  }
+
+
+
+  /* Thông báo */
+  /* .swal2-title {
+  text-align: left !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: black !important;
+  position: relative;
+  margin-top:  0 !important;
+  margin-left:  0 !important;
+  top: 0;
+  left: 0;
+} */
+  .confirm-delete-row .swal2-confirm,
+  .confirm-delete-row .swal2-cancel {
+    font-size: 14px !important;
+  }
+
+  /* .swal2-confirm, .swal2-cancel {
+  font-size: 10px;
+} */
+  .swal2-title {
+    text-align: left !important;
+    /* margin: 0 !important; */
+    padding: 0 !important;
+    color: black !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+    margin-bottom: 20px;
+  }
+
+  .swal2-container {
+    margin-right: auto !important;
+  }
+
+  .swal2-confirm {
+    color: black !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    /* font-size: 10px; */
+    width: 77px;
+    border-radius: .25em;
+    height: 36px;
+    background-color: #A6ECAB !important;
+    font-weight: bold;
+  }
+
+  .swal2-cancel {
+    color: black !important;
+    border: none !important;
+    /* font-size:small; */
+    background-color: #FFC5C5 !important;
+    width: 77px;
+    border-radius: 2px;
+    height: 36px;
+    font-weight: bold;
+  }
+
+
+  .swal2-confirm:not([class*="swal2-cancel"]) {
+    border: none !important;
+  }
+
+  .swal2-cancel {
+    right: 5px;
+    border: none !important;
+  }
+
+  .swal2-popup {
+    width: 400px !important;
+    height: 190px !important;
+  }
+
+  /* .swal2-actions{
+    margin-left: auto;
+  } */
+  /* .swal2-styled.swal2-cancel {
+    margin-left: auto;
+    border-radius: .25em;
+    background: initial;
+    background-color: #757575;
+    color: #fff;
+    font-size: 1em;
+} */
+  .swall-action {
+    margin: 30px auto 0 !important
+  }
+
+  .swal2-styled.swal2-confirm {
+    margin-left: auto;
+  }
+
+  .confirm-delete-row {
+    bottom: 0;
+    right: 0;
+  }
+
+  .swal2-content {
+    padding: 0px !important;
+  }
+
+  i.far.fa-question-circle {
+    opacity: 1;
+    color: black;
+  }
+
+  .app-menu__icon {
+    font-size: 23px;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 40px;
+    margin-right: 4px;
+  }
+
+  /* popup close  */
+  button.swal2-close {
+    color: black;
+    /* font-weight: bold; */
+  }
+</style>
+
+<body onload="time()" class="app sidebar-mini rtl">
+  <div id="notifi-sucess" class="alert alert-success">
+    <i class="fa-solid fa-check" style="font-size: 18px; margin-right: 5px;"></i> <strong
+      style="width: 255px; height: 52px;">Thêm khách
+      hàng thành công</strong>
+  </div>
+  <div id="notifi-sucess1" class="alert alert-success">
+    <i class="fa-solid fa-check" style="font-size: 18px; margin-right: 5px;"></i> <strong
+      style="width: 255px; height: 52px;">Sửa thông tin khách hàng thành công</strong>
+  </div>
+  <!-- Navbar-->
+  <header class="app-header">
+    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+      aria-label="Hide Sidebar"></a>
+    <!-- Navbar Right Menu-->
+    <ul class="app-nav">
+      <!-- User Menu-->
+      <li><a class="app-nav__item" href="/HTML/login.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+
+      </li>
+    </ul>
+  </header>
+  <!-- Sidebar menu-->
+  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+  <aside class="app-sidebar">
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/LOGO.png" width="50px"
+        alt="User Image">
+      <div>
+        <p class="app-sidebar__user-name"><b>HMU Travel</b></p>
+        <p class="app-sidebar__user-designation">Trang Nhân Viên </p>
+      </div>
+    </div>
+    <hr>
+    <ul class="app-menu">
+
+      <li><a class="app-menu__item active" href="table-data-khach.html"><i
+            class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Quản lý khách hàng</span></a></li>
+
+
+      <li><a class="app-menu__item" href="dat_dich_vu.html"><i class='app-menu__icon bx bx-task'></i><span
+            class="app-menu__label">Quản lý đơn đặt tour </span></a></li>
+      <li><a class="app-menu__item" href="table-data-oder.html"><img src="icon11.png" style="color: white; "> <span class="app-menu__label" style="margin-left: 12px;">Chăm sóc khách
+            hàng</span></a>
+      </li>
+    </ul>
+  </aside>
+  <main class="app-content">
+    <div class="app-title">
+      <ul class="app-breadcrumb breadcrumb side">
+        <li class="breadcrumb-item active"><a href="#"><b>Danh sách khách hàng</b></a></li>
+      </ul>
+      <div id="clock"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tile">
+          <div class="tile-body">
+
+            <div class="row element-button">
+              <div class="col-sm-2">
+
+                <a class="btn btn-add btn-sm" href="form-add-khach.html" title="Thêm"><i class="fas fa-plus"></i>
+                  Tạo mới khách hàng</a>
+              </div>
+            </div>
+            <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
+              id="sampleTable">
+              <thead>
+                <tr>
+                  <th width="10"><input type="checkbox" id="all"></th>
+                  <th style="text-align: center;">Mã khách hàng</th>
+                  <th width="150" style="text-align: center;">Họ và tên</th>
+
+                  <th width="300" style="text-align: center;">Địa chỉ</th>
+                  <th width="95px" style="text-align: center;">Ngày sinh</th>
+                  <th style="text-align: center;">Giới tính</th>
+                  <th width="150" style="text-align: center;">Email</th>
+                  <th style="text-align: center;">SĐT</th>
+                  <th width="80" style="text-align: center;">Tính năng</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!--
+  MODAL form sửa cũ 
+ 
+  MODAL
+-->
+
+  <!-- Essential javascripts for application to work-->
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+  <script src="src/jquery.table2excel.js"></script>
+  <script src="js/main.js"></script>
+  <!-- The javascript plugin to display page loading on top-->
+  <script src="js/plugins/pace.min.js"></script>
+  <!-- Page specific javascripts-->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.js"></script>
+
+  <!-- Data table plugin-->
+  <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
+ 
+  <script>
+    //Thêm mơi khách hàng của tôi 
+
+    let khachhangs = JSON.parse(localStorage.getItem('khachhangs')) || [];
+    if (khachhangs.length == 0) {
+      khachhangs.push({
+        ma: "LGV2345",
+        ten: "Trần Anh Khoa",
+        mail: "khoatr@gmail.com",
+        diachi: "180 Lương Thế Vinh ,Thanh Xuân , Hà Nội	",
+        sdt: "0916706633",
+        ngaysinh: "1995-02-18",
+        gioitinh: "Nam"
+      })
+
+      khachhangs.push({
+        ma: "LGV1234",
+        ten: "Nguyễn Thành Nhân",
+        mail: "ngnhan@gmail.com",
+        diachi: "Số 13, Tân Thuận Đông, Quận 7, Hồ Chí Minh",
+        sdt: "0971038066",
+        ngaysinh: "1996-03-17",
+        gioitinh: "Nam"
+      })
+
+      khachhangs.push({
+        ma: "LGV2580",
+        ten: "Nguyễn Đặng Trọng Nhân",
+        mail: "trnhan@gmail.com",
+        diachi: "59C Nguyễn Đình Chiểu, Quận 3, Hồ Chí Minh",
+        sdt: "0846881155",
+        ngaysinh: "1996-07-23",
+        gioitinh: "Nam"
+      })
+
+      khachhangs.push({
+        ma: "	LGV0123",
+        ten: "Trần Thị Nam",
+        mail: "Namdd@gmail.com",
+        diachi: "645 Cổ Nhuế , Bắc Từ Liêm , Hà Nội",
+        sdt: "0836333037",
+        ngaysinh: "1996-07-23",
+        gioitinh: "Nữ"
+      })
+      localStorage.setItem('khachhangs', JSON.stringify(khachhangs));
+    }
+    let tbodyElement = document.querySelector('#sampleTable tbody');
+    console.log(khachhangs)
+    let textHtml = ``;
+    for (let i = 0; i < khachhangs.length; i++) {
+      // for cũ dài ngoằng ngoằng quá copy text luôn cho nhanh :3
+      let text = `<tr>
+                  <td width="10"><input type="checkbox" name="check4" value="4"></td>
+                  <td id = "ma">${khachhangs[i].ma}</td>
+                  <td>${khachhangs[i].ten}</td>
+                  <td>${khachhangs[i].diachi}</td>
+                  <td>${khachhangs[i].ngaysinh}</td>
+                  <td>${khachhangs[i].gioitinh}</td>
+                  <td>${khachhangs[i].mail}</td>
+                  <td id="sdt_right">${khachhangs[i].sdt}</td>
+                  <td style="text-align: center;" >
+                   
+                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-ma="${khachhangs[i].ma}" data-ten="${khachhangs[i].ten}" 
+                    data-diachi="${khachhangs[i].diachi}" data-ngaysinh="${khachhangs[i].ngaysinh}" data-gioitinh="${khachhangs[i].gioitinh}" data-mail="${khachhangs[i].mail}" data-sdt="${khachhangs[i].sdt}"> 
+                    <div> <i style="color: #F59D39;" class="fas fa-edit"></i></div>
+                
+                  </button>
+                    <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" id="xoa" onclick="myFunction()">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>`
+      textHtml += text;
+    }
+    tbodyElement.innerHTML = tbodyElement.innerHTML + textHtml
+
+    let successMessage = localStorage.getItem('addKH');
+
+    console.log(successMessage)
+    if (successMessage == 1) {
+
+      let notification = document.getElementById('notifi-sucess');
+      notification.classList.add('show');
+      notification.classList.remove('hide');
+      setTimeout(function () {
+        let notification = document.getElementById('notifi-sucess');
+        notification.classList.remove('show');
+        setTimeout(function () {
+          let notification = document.getElementById('notifi-sucess');
+          notification.classList.add('hide');
+        }, 1000);
+      }, 3000);
+      localStorage.setItem('addKH', JSON.stringify(0));
+    }
+    let successMessage1 = localStorage.getItem('updateKH');
+
+    console.log(successMessage1)
+    if (successMessage1 == 1) {
+
+      let notification = document.getElementById('notifi-sucess1');
+      notification.classList.add('show');
+      notification.classList.remove('hide');
+      setTimeout(function () {
+        let notification = document.getElementById('notifi-sucess1');
+        notification.classList.remove('show');
+        setTimeout(function () {
+          let notification = document.getElementById('notifi-sucess1');
+          notification.classList.add('hide');
+        }, 1000);
+      }, 3000);
+      localStorage.setItem('updateKH', JSON.stringify(0));
+    }
+
+
+
+    // //Modal
+    $("#show-emp").on("click", function () {
+      $("#ModalUP").modal({ backdrop: false, keyboard: false })
+    });
+  </script>
+  <script>
+    function confirmDeleteRow(row) {
+      swal.fire({
+        title: "THÔNG BÁO",
+        html: '<i class="far fa-question-circle" style="color: black; margin-right:5px font-size: 20px"></i> <span style="color:black; font-size: 14px">Bạn có chắc chắn là muốn xóa khách hàng này?</span>',
+        showCloseButton: true,
+        showCancelButton: true,
+        confirmButtonColor: "#A6ECAB",
+        cancelButtonColor: "#FFC5C5",
+        confirmButtonText: 'Đồng ý',
+        cancelButtonText: "Hủy bỏ",
+        reverseButtons: false,
+        closeOnClickOutside: false,
+        customClass: "confirm-delete-row"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteRow(row);
+        }
+      });
+    }
+
+    function deleteRow(row) {
+      var i = row.parentNode.parentNode.rowIndex;
+      khachhangs.splice(i - 1, 1);
+      localStorage.setItem('khachhangs', JSON.stringify(khachhangs));
+      document.getElementById("sampleTable").deleteRow(i);
+
+      // display success message
+      var successMessage = document.createElement("div");
+      successMessage.innerHTML = '<i class="fa-solid fa-check" style="font-size: 19px; color: #000000; margin-right: 5px;"></i> Bạn đã xóa khách hàng thành công';
+      // successMessage.textContent = "  Bạn đã xóa khách hàng thành công";
+      successMessage.style.position = "fixed";
+      successMessage.style.right = "-118px";
+      successMessage.style.top = "13%";
+      successMessage.style.transform = "translate(-50%, -50%)";
+      successMessage.style.padding = "10px 12px";
+      successMessage.style.backgroundColor = "#9df99d";
+      successMessage.style.color = "#000000";
+      successMessage.style.fontWeight = "bold";
+      // successMessage.style.border = "5px";
+      successMessage.style.borderRadius = "7px";
+      successMessage.style.height = "40px";
+      document.body.appendChild(successMessage);
+      setTimeout(function () {
+        document.body.removeChild(successMessage);
+      }, 3000);
+    }
+
+    jQuery(function () {
+      jQuery(".trash").click(function () {
+        confirmDeleteRow(this);
+      });
+    });    // -----
+
+    // ----
+    //Sự kiện khi ấn nút sửa 00000000000000000000000000000
+
+    //Thời Gian
+    function time() {
+      var today = new Date();
+      var weekday = new Array(7);
+      weekday[0] = "Chủ Nhật";
+      weekday[1] = "Thứ Hai";
+      weekday[2] = "Thứ Ba";
+      weekday[3] = "Thứ Tư";
+      weekday[4] = "Thứ Năm";
+      weekday[5] = "Thứ Sáu";
+      weekday[6] = "Thứ Bảy";
+      var day = weekday[today.getDay()];
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      var s = today.getSeconds();
+      m = checkTime(m);
+      s = checkTime(s);
+      nowTime = h + " giờ " + m + " phút " + s + " giây";
+      if (dd < 10) {
+        dd = '0' + dd
+      }
+      if (mm < 10) {
+        mm = '0' + mm
+      }
+      today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+      tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+        '</span>';
+      document.getElementById("clock").innerHTML = tmp;
+      clocktime = setTimeout("time()", "1000", "Javascript");
+
+      function checkTime(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+        return i;
+      }
+    }
+    // In dữ liệu
+    var myApp = new function () {
+      this.printTable = function () {
+        var tab = document.getElementById('sampleTable');
+        var win = window.open('', '', 'height=700,width=700');
+        win.document.write(tab.outerHTML);
+        win.document.close();
+        win.print();
+      }
+    }
+
+
+    //  <!-- custom tìm kiếm theo mã tên email tương ứng với cột 2 6 7-->
+    var a = $('#sampleTable').DataTable({
+      columnDefs: [
+        { targets: [2], searchable: true },
+        { targets: [0], searchable: false },
+        { targets: [1], searchable: true },
+        { targets: [3], searchable: true },
+        { targets: [4], searchable: true },
+        { targets: [5], searchable: true },
+        { targets: [6], searchable: true },
+        { targets: [7], searchable: true },
+      ]
+    });
+    $(".edit").click(function () {
+
+      var khachhangInfo = {
+
+        ma: $(this).data("ma"),
+        ten: $(this).data("ten"),
+        diachi: $(this).data("diachi"),
+        ngaysinh: $(this).data("ngaysinh"),
+        gioitinh: $(this).data("gioitinh"),
+        mail: $(this).data("mail"),
+        sdt: $(this).data("sdt")
+      };
+      console.log(khachhangInfo)
+      localStorage.setItem("selectedKhachhang", JSON.stringify(khachhangInfo));
+      location.href = "./sua_khach.html"
+    });
+
+
+  </script>
+
+
+</body>
+
+</html>

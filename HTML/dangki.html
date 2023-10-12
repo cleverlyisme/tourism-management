@@ -1,0 +1,121 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<!-- Nhúng file CSS -->
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f7a4a4;
+    background-image: url(/IMG/DK.jpg);
+    }
+    form{
+        padding-top: 70px;
+    }
+    a {
+    color: #00bd00;
+    }
+    * {
+    box-sizing: border-box;
+    }
+    .register {
+    width: 500px;
+    padding: 16px;
+    margin: 0 auto;
+    background-color: rgb(129, 161, 164);
+
+    }
+    input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    }
+    input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+    }
+    hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+    }
+    .submit {
+    background-color: #0900bd;
+    color: white;
+    padding: 15px 18px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    }
+    .submit:hover {
+    opacity: 1;
+    }
+    .login {
+    background-color: #ffffff;
+    text-align: center;
+    }
+</style>
+</head>
+<body>
+    <!-- Nhúng file JavaScript -->
+    <script language="javascript" src="kiemtra.js"></script>
+    <form action="" method="POST" onsubmit="return validate()">
+        <div class="register">
+            <h1>Đăng ký</h1>
+            <p>Vui lòng điền thông tin để đăng ký</p>
+            <hr>
+            <label for="username"><b>Tên đăng nhập</b></label>
+            <input type="text" placeholder="Họ và tên" name="username" id="username">
+            <label for="password"><b>Mật khẩu</b></label>
+            <input type="password" placeholder="******" name="password" id="password">
+            <label for="password-repeat"><b>Nhập lại mật khẩu</b></label>
+            <input type="password" placeholder="******" name="password-repeat" id="password-repeat">
+            <hr>
+            <button type="submit" class="submit">Đăng ký</button>
+            </div>
+           
+        </div>
+    </form>
+</body>
+<script>
+    function validate() {
+        var u = document.getElementById("username").value;
+        var p1 = document.getElementById("password").value;
+        var p2 = document.getElementById("password-repeat").value;
+
+        if( u == "" && p2 == "" || u == "" && p1 == "" || u == "" && p1 == "" && p2 == "") {
+            alert("Vui lòng điền đầy đủ thông tin!");
+            return false;
+        }
+        if(u== "") {
+            alert("Vui lòng nhập tên!");
+            return false;
+        }
+        if(p1 == "") {
+            alert("Vui lòng nhập mật khẩu!");
+            return false;
+        }
+        if(p2 == "") {
+            alert("Vui lòng xác minh mật khẩu!");
+            return false;
+        }
+        
+        if(p1 != p2 ) {
+            alert("Mật khẩu xác minh chưa đúng!");
+            
+            return false;
+        }
+        else {
+            alert("Qúy khách đã đăng kí thành công!")   
+            window.location = "login.html";  
+            return false; 
+            // return true;
+        }
+       
+        
+    }
+</script>
+</html>

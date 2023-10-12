@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Demo</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container-fluid">
+                <a class="navbar-brand " href="#page-top">
+                    <h4 class="font-weight-bold">RESUME</h4>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active text-uppercase" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link text-uppercase" aria-current="page" href="teacher.html">Mr Teacher</a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html"><button
+                                    class="btn btn-outline-success my-2 my-sm-0 wow bounce" id="btnlogin"
+                                    type="submit">Login in</button></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="registration.html"><button
+                                    class="btn btn-outline-success my-2 my-sm-0 wow bounce" type="submit"
+                                    onclick="get()">Registration</button></a>
+                        </li>
+
+
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section id="home" class="main-banner" style="background: url('images/banner-01.jpg')">
+        <div class="heading">
+            <h1 class="wow flipInX">Welcome to Resume System</h1>
+            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, <br>sed do eiusmod tempor."</p>
+            <a href="teacher.html?id=1"><button class="btn btn-outline-success my-2 my-sm-0 wow bounce" type="submit">CV Mr Teacher 1</button></a><br><br>
+            <a href="teacher.html?id=2"><button class="btn btn-outline-success my-2 my-sm-0 wow bounce" type="submit">CV Mrs Teacher 2</button></a><br><br>
+        </div>
+    </section>
+
+
+    <!-----Register page---->
+    <!--- <section id="Register" class="login-page" style="background:#fff">-->
+
+
+
+    <!-----Login page---->
+
+
+    <script>
+        function check(input) {
+            if (document.getElementById('password').value != document.getElementById('comfirm-password').value) {
+                input.setCustomValidity('Password Must be Matching.');
+            }
+        }
+
+    </script>
+
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/headline.js"></script>
+    <script src="js/parallaxie.js"></script>
+    <script src="js/init_script.js"></script> 
+    <!-- Khởi tạo Dữ liệu ban đầu cho trang > Lưu trữ vào localStorage của Trình duyệt -->
+<script>
+        new WOW().init();
+    </script>
+    
+</body>
+
+</html>

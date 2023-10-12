@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Thêm Khách | Quản trị Admin</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Main CSS-->
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <!-- or -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <!-- Font-icon css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
+  <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+  <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+  <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+</head>
+
+<body class="app sidebar-mini rtl">
+  <style>
+    .tile .tile-title{
+      border-bottom: 1px solid #ddd;
+    }
+    .success-message {
+      position: fixed;
+      width: 290px;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px;
+      background-color: #d7f5d7;
+      color: black;
+      border-radius: 4px;
+      display: none;
+    }
+
+    .form-group.col-md-6 {
+      display: flex;
+      align-items: center;
+      margin-bottom: 35px;
+    }
+
+    .form-group {
+      position: relative;
+      /* container cần có position: relative */
+    }
+
+    .form-group input {
+      margin-bottom: 0;
+      /* loại bỏ margin dưới của input để cho phần tử thông báo lỗi đặt ngay dưới */
+      margin-left: 50px;
+      width: 420px;
+    }
+
+    .form-group .abc {
+      position: absolute;
+      bottom: -22px;
+      /* đặt vị trí của phần tử thông báo lỗi 20px dưới input */
+      left: 150px;
+      font-size: 13px;
+      /* định dạng cho phần tử thông báo lỗi */
+      color: red;
+    }
+
+    .control-label {
+      white-space: nowrap;
+
+
+    }
+  </style>
+  <!-- Navbar-->
+  <header class="app-header">
+    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+      aria-label="Hide Sidebar"></a>
+    <!-- Navbar Right Menu-->
+    <ul class="app-nav">
+      <!-- User Menu-->
+      <li><a class="app-nav__item" href="/HTML/login.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+
+      </li>
+    </ul>
+  </header>
+  <!-- Sidebar menu-->
+  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+  <aside class="app-sidebar">
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/LOGO.png" width="50px"
+        alt="User Image">
+      <div>
+        <p class="app-sidebar__user-name"><b>HMU Travel</b></p>
+        <p class="app-sidebar__user-designation">Trang Nhân Viên </p>
+      </div>
+    </div>
+    <hr>
+    <ul class="app-menu">
+
+      <li><a class="app-menu__item active" href="table-data-khach.html"><i
+            class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Quản lý khách hàng</span></a></li>
+      <li><a class="app-menu__item" href="dat_dich_vu.html"><i class='app-menu__icon bx bx-task'></i><span
+            class="app-menu__label">Quản lý đơn đặt tour </span></a></li>
+      <li><a class="app-menu__item" href="table-data-oder.html"><img src="icon11.png" style="color: white; "> <span class="app-menu__label" style="margin-left: 12px;">Chăm sóc khách
+            hàng</span></a>
+      </li>
+    </ul>
+  </aside>
+  <main class="app-content">
+    <div class="app-title">
+      <ul class="app-breadcrumb breadcrumb">
+        <li class="breadcrumb-item">Danh sách khách hàng</li>
+        <li class="breadcrumb-item"><a href="#">Tạo mới khách hàng</a></li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tile">
+          <h3 class="tile-title">Tạo mới khách hàng</h3>
+          <div class="tile-body">
+            <!-- <div class="row element-button">
+            </div> -->
+
+
+            <!-- Các ô input khác ở đây -->
+
+            <form class="row">
+              <div class="form-group col-md-6" style="display: flex; align-items: center;">
+                <label class="control-label">Mã khách hàng:</label>
+                <input class="form-control" type="text" id="ma" placeholder="" style="margin-left: 35px">
+                <div id="errorMa" class="abc text-danger"></div>
+              </div>
+              <div class="form-group col-md-6" style="padding-left: 35px">
+                <label class="control-label" style="margin-left: 25px;">Họ và tên: </label>
+                <input class="form-control" type="text" required id="ten" style="margin-left: 31px !important">
+                <div id="errorTen" class="abc text-danger" style="left: 157px;"></div>
+
+              </div>
+              <div class="form-group col-md-6">
+                <label class="control-label">Địa chỉ email: </label>
+                <input class="form-control" type="text" required id="mail">
+                <div id="errorMail" class="abc text-danger"></div>
+
+              </div>
+              <div class="form-group col-md-6" style="padding-left: 35px;">
+                <label class="control-label" style="margin-left: 25px;">Địa chỉ: </label>
+                <input class="form-control" type="text" required id="diachi" style="margin-left: 50px !important">
+                <div id="errorDiachi" class="abc text-danger" style="left: 157px;"></div>
+
+              </div>
+              <div class="form-group  col-md-6">
+                <label class="control-label">Số điện thoại: </label>
+                <input class="form-control" type="number" required id="sdt" style="margin-left: 48px">
+                <div id="errorSDT" class="abc text-danger"></div>
+
+              </div>
+              <div class="form-group col-md-6" style="padding-left: 35px">
+                <label class="control-label" style="margin-left: 25px;">Ngày sinh: </label>
+                <input class="form-control" type="date" id="ngaysinh" style="margin-left: 30px !important">
+                <div id="errorNgaysinh" class="abc text-danger" style="left: 157px;"></div>
+
+              </div>
+              <div class="form-group col-md-6" style="display: flex; align-items: center;">
+                <label class="control-label">Giới tính: </label>
+                <div>
+                  <select class="form-control" required id="gioitinh" style="margin-left: 78px ;width: 420px;">
+                    <option>--Chọn giới tính--</option>
+                    <option>Nam</option>
+                    <option>Nữ</option>
+                  </select>
+                  <div id="errorGioitinh" class="abc text-danger"></div>
+                </div>
+              </div>
+
+
+          </div>
+
+
+          <div>
+            <div class="button-container" style="text-align: right; margin-top: 20px;">
+              <!-- <a href="./table-data-product.html" class="btn btn-save" style="margin-right: 0;" type="submit"  onclick="return checkAll()"> Lưu lại</a> -->
+              <button class="btn btn-save" style="margin-right: 0; background-color: #A6ECAB;" type="button"
+                onclick="return checkAll()">
+                Lưu lại
+              </button>
+              <a class="btn btn-cancel " style="margin-right: 3px;margin-left: 20px;background-color: #FFC5C5;"
+                href="table-data-khach.html">Hủy
+                bỏ</a>
+            </div>
+            <!-- <button class="btn btn-save"  type="submit"  onclick="return checkAll()">
+              Lưu lại
+            </button>
+            <a class="btn btn-cancel "  href="table-data-product.html">Hủy bỏ</a> -->
+          </div>
+        </div>
+
+  </main>
+
+
+  <!--
+  MODAL
+-->
+  <!--
+  MODAL
+-->
+
+
+  <!-- Essential javascripts for application to work-->
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+  <!-- The javascript plugin to display page loading on top-->
+  <script src="js/plugins/pace.min.js"></script>
+
+  <script>
+
+    function checkAll() {
+      let ma = document.getElementById('ma').value;
+      let ten = document.getElementById('ten').value;
+      let mail = document.getElementById('mail').value;
+      let diachi = document.getElementById('diachi').value;
+      let sdt = document.getElementById('sdt').value;
+      let ngaysinh = document.getElementById('ngaysinh').value;
+      let gioitinh = document.getElementById('gioitinh').value;
+      let isError = false;
+
+      if (ma.trim() === '') {
+        document.getElementById('errorMa').innerHTML = 'Mã không được để trống.';
+        isError = true;
+      } else {
+        document.getElementById('errorMa').innerHTML = '';
+      }
+
+      if (ten.trim() === '') {
+        document.getElementById('errorTen').innerHTML = 'Tên khách hàng không được để trống.';
+        isError = true;
+      } else {
+        document.getElementById('errorTen').innerHTML = '';
+      }
+
+      if (mail.trim() === '') {
+        document.getElementById('errorMail').innerHTML = 'Email không được để trống.';
+        isError = true;
+      }
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) {
+        document.getElementById('errorMail').innerHTML = 'Nhập sai định dạng thông tin <br>';
+        return false;
+      }
+      else {
+        document.getElementById('errorMail').innerHTML = '';
+      }
+
+      if (diachi.trim() === '') {
+        document.getElementById('errorDiachi').innerHTML = 'Địa chỉ không được để trống.';
+        isError = true;
+      } else {
+        document.getElementById('errorDiachi').innerHTML = '';
+      }
+
+      if (sdt.trim() === '') {
+        document.getElementById('errorSDT').innerHTML = 'Số điện thoại không được để trống.';
+        isError = true;
+      } else if (!/^\d{10}$/.test(sdt)) {
+        document.getElementById('errorSDT').innerHTML = 'Nhập sai định dạng thông tin <br>';
+        return false;
+      }
+      else {
+        document.getElementById('errorSDT').innerHTML = '';
+      }
+      if (ngaysinh.trim() === '') {
+        document.getElementById('errorNgaysinh').innerHTML = 'Ngày sinh không được để trống.';
+        isError = true;
+      } else {
+        document.getElementById('errorNgaysinh').innerHTML = '';
+      }
+      if (gioitinh.trim() === '--Chọn giới tính--') {
+        document.getElementById('errorGioitinh').innerHTML = 'Giới tính không được để trống.';
+        isError = true;
+      }
+      else {
+        document.getElementById('errorGioitinh').innerHTML = '';
+      }
+
+      if (isError) {
+        return false;
+      }
+
+      // Create an object to store the tour information
+      let khachhang = {
+        ma: ma,
+        ten: ten,
+        mail: mail,
+        diachi: diachi,
+        sdt: sdt,
+        ngaysinh: ngaysinh,
+        gioitinh: gioitinh
+      };
+
+      // Get the existing tours from local storage or create an empty array
+      let khachhangs = JSON.parse(localStorage.getItem('khachhangs')) || [];
+
+      // Add the new tour information to the array of tours
+      khachhangs.push(khachhang);
+
+      // Save the updated tour information array to local storage
+      localStorage.setItem('khachhangs', JSON.stringify(khachhangs));
+      console.log('Thành công! Đã thêm khách hàng mới:', khachhang);
+      // Redirect to the tour table page and show a success message
+      localStorage.setItem('addKH', JSON.stringify(1));
+      window.location.href = './table-data-khach.html';
+
+      return true;
+    }
+
+  </script>
+
+
+
+</body>
+
+</html>

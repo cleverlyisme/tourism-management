@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Thêm nhân viên | Quản trị Admin</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Main CSS-->
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <!-- or -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <!-- Font-icon css-->
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   
+  
+  <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+
+
+</head>
+
+<body class="app sidebar-mini rtl">
+  <style>
+    .success-message {
+      position: fixed;
+      width: 290px;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px;
+      background-color: #d7f5d7;
+      color: black;
+      border-radius: 4px;
+      display: none;
+    }
+    .form-group.col-md-6 {
+      display: flex;
+      align-items: center;
+      margin-bottom: 35px;
+    }
+
+    .form-group {
+      position: relative;
+      /* container cần có position: relative */
+    }
+
+    .form-group input {
+      margin-bottom: 0;
+      margin-left: 50px;
+      width: 350px;
+    }
+
+    .form-group .abc {
+      position: absolute;
+      bottom: -22px;
+      left: 170px;
+      font-size: 13px;
+      color: red;
+    }
+
+    .control-label {
+      white-space: nowrap;
+      margin-left: 20px;
+
+
+    }
+  </style>
+  <!-- Navbar-->
+  <header class="app-header">
+    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+      aria-label="Hide Sidebar"></a>
+    <!-- Navbar Right Menu-->
+    <ul class="app-nav">
+
+
+      <!-- User Menu-->
+      <li><a class="app-nav__item" href="/HTML/login.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+
+      </li>
+    </ul>
+  </header>
+  <!-- Sidebar menu-->
+  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+  <aside class="app-sidebar">
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/LOGO.png" width="50px"
+        alt="User Image">
+      <div>
+        <p class="app-sidebar__user-name"><b>HMU</b></p>
+        <p class="app-sidebar__user-designation">Chào mừng bạn đến HMU Travel</p>
+      </div>
+    </div>
+    <hr>
+    <ul class="app-menu">
+      <li><a class="app-menu__item active" href="table-data-table.html"><i class='app-menu__icon fa-solid fa-users'></i>
+        <span class="app-menu__label">Quản lý nhân viên</span></a></li>
+        <!-- <i class='app-menu__icon bx bx-purchase-tag-alt'></i> -->
+    <li><a class="app-menu__item  " href="table-data-product.html"><i class="app-menu__icon fa-solid fa-location-dot" ></i>
+      <span class="app-menu__label">Quản lý tour</span></a>
+    </li>
+    
+    <li><a class="app-menu__item" href="quan-ly-bao-cao.html"><i
+          class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Thống kê doanh thu</span></a>
+    </li>
+      
+    </ul> 
+  </aside>
+  <main class="app-content">
+    <div class="app-title">
+      <ul class="app-breadcrumb breadcrumb">
+        <li class="breadcrumb-item">Danh sách nhân viên</li>
+        <li class="breadcrumb-item"><a href="#">Thêm nhân viên</a></li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="tile">
+
+          <h3 class="tile-title">Tạo mới nhân viên</h3>
+          <div class="tile-body" style="height: 300px;">
+
+            <form class="row">
+              <div class="form-group col-md-6" style="display: flex; align-items: center;">
+                <label class="control-label">Mã nhân viên:</label>
+                <input class="form-control" type="text" id="ma" placeholder="" style="margin-left: 45px ;width: 350px;">
+                <div id="errorMa" class="abc text-danger"></div>
+              </div>
+              <div class="form-group col-md-6" style="padding-left: 35px">
+                <label class="control-label">Họ và tên: </label>
+                <input class="form-control" type="text" required id="ten">
+                <div id="errorTen" class="abc text-danger" style="left: 170px;"></div>
+
+              </div>
+              <div class="form-group col-md-6">
+                <label class="control-label">Địa chỉ email: </label>
+                <input class="form-control" type="text" required id="mail">
+                <div id="errorMail" class="abc text-danger"></div>
+
+              </div>
+              <div class="form-group col-md-6" style="padding-left: 35px;">
+                <label class="control-label">Địa chỉ: </label>
+                <input class="form-control" type="text" required id="diachi" style="margin-left: 69px !important">
+                <div id="errorDiachi" class="abc text-danger" style="left: 170px;"></div>
+
+              </div>
+              <div class="form-group  col-md-6">
+                <label class="control-label">Số điện thoại: </label>
+                <input class="form-control" type="number" required id="sdt" style="margin-left: 48px">
+                <div id="errorSDT" class="abc text-danger"></div>
+
+              </div>
+              <div class="form-group col-md-6" style="padding-left: 35px">
+                <label class="control-label">Ngày sinh: </label>
+                <input class="form-control" type="date" id="ngaysinh">
+                <div id="errorNgaysinh" class="abc text-danger" style="left: 170px;"></div>
+
+              </div>
+              <div class="form-group col-md-6" style="display: flex; align-items: center;">
+                <label class="control-label">Giới tính: </label>
+                <div>
+                  <select class="form-control" required id="gioitinh" style="margin-left: 77px ;width: 350px;">
+                    <option>--Chọn giới tính--</option>
+                    <option>Nam</option>
+                    <option>Nữ</option>
+                  </select>
+                  <div id="errorGioitinh" class="abc text-danger"></div>
+                </div>
+              </div>
+
+              <div class="form-group col-md-6" style="display: flex; align-items: center;">
+                <label class="control-label" style="padding-left:17px">Chức vụ: </label>
+                <div>
+                  <select class="form-control" required id="chucvu" style="margin-left: 65px ;width: 350px;">
+                    <option>--Chọn chức vụ--</option>
+                    <option>Quản lý</option>
+                    <option>Nhân viên</option>
+                  </select>
+                  <div id="errorChucvu" class="abc text-danger"></div>
+                </div>
+              </div>
+        
+          </div>
+
+              
+
+              <!-- <div class="form-group col-md-3">
+                <label class="control-label">Chức vụ:</label>
+                <input class="form-control" type="text" id="chucvu">
+                <div id="errorChucvu"  class="abc text-danger"></div>
+              </div> -->
+
+              <!-- <div class="form-group  col-md-3">
+                <label class="control-label">Chức vụ</label>
+                <input class="form-control" type="text" id="chucvu">
+                <div id="errorChucvu"  class="abc text-danger"></div>
+                <select class="form-control" id="chucvu">
+                  <option value="">-- Chọn chức vụ --</option>
+                 <option value="nam">Quản lý</option>
+                <option value="nu">Nhân viên</option>
+                </select>
+                
+              </div> -->
+
+              <div>
+            <div class="button-container" style="text-align: right; margin-top: 20px;">
+              <button class="btn btn-save" style="margin-right: 0; color:black" type="button" onclick="return checkAll()"
+                data-dismiss="modal">
+                Lưu lại
+              </button>
+              <a class="btn btn-cancel " style="margin-right: 50px;margin-left: 20px; color:black" href="table-data-product.html">Hủy
+                bỏ</a>
+            </div>
+            <!-- <button class="btn btn-save"  type="submit"  onclick="return checkAll()">
+                  Lưu lại
+                </button>
+                <a class="btn btn-cancel "  href="table-data-product.html">Hủy bỏ</a> -->
+          </div>
+
+          </div>
+
+
+          
+
+        </div>
+        <!-- <table id = "table">
+
+            </table> -->
+        <!-- <div id="successMessage" class="success-message"></div> -->
+
+  </main>
+
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/plugins/pace.min.js"></script>
+
+  <script>
+
+    function checkAll() {
+      let ma = document.getElementById('ma').value;
+      let ten = document.getElementById('ten').value;
+      let mail = document.getElementById('mail').value;
+      let diachi = document.getElementById('diachi').value;
+      let sdt = document.getElementById('sdt').value;
+      let ngaysinh = document.getElementById('ngaysinh').value;
+      let gioitinh = document.getElementById('gioitinh').value;
+      let chucvu = document.getElementById('chucvu').value;
+      let isError = false;
+
+      if (ma.trim() === '') {
+        document.getElementById('errorMa').innerHTML = 'Mã không được để trống <br>';
+        isError = true;
+      } else {
+        document.getElementById('errorMa').innerHTML = '';
+      }
+
+      if (ten.trim() === '') {
+        document.getElementById('errorTen').innerHTML = 'Tên không được để trống';
+        isError = true;
+      } else {
+        document.getElementById('errorTen').innerHTML = '';
+      }
+
+      if (mail.trim() === '') {
+        document.getElementById('errorMail').innerHTML = 'Email không được để trống';
+        isError = true;
+      }
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) {
+        document.getElementById('errorMail').innerHTML = 'Nhập sai định dạng<br>';
+        return false;
+      }
+
+      else {
+        document.getElementById('errorMail').innerHTML = '';
+      }
+
+      if (diachi.trim() === '') {
+        document.getElementById('errorDiachi').innerHTML = 'Địa chỉ không được để trống';
+        isError = true;
+      } else {
+        document.getElementById('errorDiachi').innerHTML = '';
+      }
+
+      if (sdt.trim() === '') {
+        document.getElementById('errorSDT').innerHTML = 'SĐT không được để trống';
+        isError = true;
+      } else if (!/^\d{10}$/.test(sdt)) {
+        document.getElementById('errorSDT').innerHTML = 'Nhập sai định dạng';
+        return false;
+      } else {
+        document.getElementById('errorSDT').innerHTML = '';
+      }
+
+      if (ngaysinh.trim() === '') {
+        document.getElementById('errorNgaysinh').innerHTML = 'Ngày sinh không được để trống';
+        isError = true;
+      } else {
+        document.getElementById('errorNgaysinh').innerHTML = '';
+      }
+
+      if (gioitinh.trim() === '--Chọn giới tính--') {
+        document.getElementById('errorGioitinh').innerHTML = 'Giới tính không được để trống';
+        isError = true;
+      }
+      else {
+        document.getElementById('errorGioitinh').innerHTML = '';
+      }
+
+      if (chucvu.trim() === '--Chọn chức vụ--') {
+        document.getElementById('errorChucvu').innerHTML = 'Chức vụ không được để trống';
+        isError = true;
+      }
+      else {
+        document.getElementById('errorChucvu').innerHTML = '';
+      }
+
+      /*if (chucvu.trim() === '') {
+        document.getElementById('errorChucvu').innerHTML = 'Chức vụ không được để trống';
+        isError = true;
+      } else {
+        document.getElementById('errorChucvu').innerHTML = '';
+      }*/
+
+
+      if (isError) {
+        return false;
+      }
+
+      // Create an object to store the tour information
+      let staff = {
+        ma: ma,
+        ten: ten,
+        mail: mail,
+        diachi: diachi,
+        sdt: sdt,
+        ngaysinh: ngaysinh,
+        gioitinh: gioitinh,
+        chucvu: chucvu,
+      };
+
+      // Get the existing tours from local storage or create an empty array
+      let staffs = JSON.parse(localStorage.getItem('staffs')) || [];
+
+
+      // Add the new tour information to the array of tours
+      staffs.push(staff);
+
+
+      // Save the updated tour information array to local storage
+      localStorage.setItem('staffs', JSON.stringify(staffs));
+      console.log('Thành công! Đã thêm tour mới:', staff);
+      // Redirect to the tour table page and show a success message
+      // localStorage.setItem('success', 'Thêm nhân viên thành công');
+      localStorage.setItem('addNV', JSON.stringify(1));
+      window.location.href = './table-data-table.html';
+      return true;
+    }
+
+
+
+  </script>
+
+
+
+
+</body>
+
+</html>

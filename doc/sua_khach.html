@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Sửa thông tin khách | Quản trị Admin</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Main CSS-->
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <!-- or -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <!-- Font-icon css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
+
+  <link rel="stylesheet" type="text/css"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+  <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+  <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+  <style>
+      .tile .tile-title {
+      border-bottom: 1px solid #ddd;
+    }
+    .form-group.col-md-6 {
+      display: flex;
+      align-items: center;
+      margin-bottom: 35px;
+    }
+
+    .form-group {
+      position: relative;
+      /* container cần có position: relative */
+    }
+
+    .form-group input {
+      margin-bottom: 0;
+      /* loại bỏ margin dưới của input để cho phần tử thông báo lỗi đặt ngay dưới */
+      margin-left: 50px;
+      width: 420px;
+    }
+
+    .form-group .abc {
+      position: absolute;
+      bottom: -22px;
+      /* đặt vị trí của phần tử thông báo lỗi 20px dưới input */
+      left: 150px;
+      font-size: 14px;
+
+      color: red;
+    }
+
+    .control-label {
+      white-space: nowrap;
+
+
+    }
+  </style>
+</head>
+
+<body class="app sidebar-mini rtl">
+  <header class="app-header">
+    <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+
+    <ul class="app-nav">
+      <li><a class="app-nav__item" href="/HTML/login.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+
+      </li>
+    </ul>
+  </header>
+  <!-- Sidebar menu-->
+  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+  <aside class="app-sidebar">
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/LOGO.png" width="50px"
+        alt="User Image">
+      <div>
+        <p class="app-sidebar__user-name"><b>HMU Travel</b></p>
+        <p class="app-sidebar__user-designation">Trang Nhân Viên </p>
+      </div>
+    </div>
+    <hr>
+    <ul class="app-menu">
+
+      <li><a class="app-menu__item active" href="table-data-khach.html"><i
+            class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Quản lý khách hàng</span></a></li>
+      <li><a class="app-menu__item" href="dat_dich_vu.html"><i class='app-menu__icon bx bx-task'></i><span
+            class="app-menu__label">Quản lý đơn đặt tour </span></a></li>
+      <li><a class="app-menu__item" href="table-data-oder.html"><img src="icon11.png" style="color: white; "> <span class="app-menu__label" style="margin-left: 12px;">Chăm sóc khách
+            hàng</span></a>
+      </li>
+    </ul>
+  </aside>
+  <main class="app-content">
+    <div class="app-title">
+      <ul class="app-breadcrumb breadcrumb">
+        <li class="breadcrumb-item">Danh sách khách</li>
+        <li class="breadcrumb-item"><a href="#">Sửa thông tin khách</a></li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tile">
+          <h3 class="tile-title">Sửa thông tin khách</h3>
+          <div class="tile-body">
+            <!-- <div class="row element-button">
+            </div> -->
+            <form class="row">
+              <div class="form-group col-md-6" style="display: flex; align-items: center;">
+                <label class="control-label">Mã khách hàng:</label>
+                <input class="form-control" type="text" id="input-ma" placeholder="" style="margin-left: 35px">
+                <div id="errorMa" class="abc text-danger"></div>
+              </div>
+              <div class="form-group col-md-6" style="padding-left: 35px">
+                <label class="control-label" style="margin-left: 25px;">Họ và tên: </label>
+                <input class="form-control" type="text" required id="input-ten" style="margin-left: 31px !important">
+                <div id="errorTen" class="abc text-danger" style="left: 157px;"></div>
+
+              </div>
+              <div class="form-group col-md-6">
+                <label class="control-label">Địa chỉ email: </label>
+                <input class="form-control" type="text" required id="input-mail">
+                <div id="errorMail" class="abc text-danger"></div>
+
+              </div>
+              <div class="form-group col-md-6" style="padding-left: 35px;">
+                <label class="control-label" style="margin-left: 25px;">Địa chỉ: </label>
+                <input class="form-control" type="text" required id="input-diachi" style="margin-left: 50px !important">
+                <div id="errorDiachi" class="abc text-danger" style="left: 157px;"></div>
+
+              </div>
+              <div class="form-group  col-md-6">
+                <label class="control-label">Số điện thoại: </label>
+                <input class="form-control" type="number" required id="input-sdt" style="margin-left: 48px">
+                <div id="errorSDT" class="abc text-danger"></div>
+
+              </div>
+              <div class="form-group col-md-6" style="padding-left: 35px">
+                <label class="control-label" style="margin-left: 25px;">Ngày sinh: </label>
+                <input class="form-control" type="date" id="input-ngaysinh" style="margin-left: 30px !important">
+                <div id="errorNgaysinh" class="abc text-danger" style="left: 157px;"></div>
+
+              </div>
+              <div class="form-group col-md-6" style="display: flex; align-items: center;">
+                <label class="control-label">Giới tính: </label>
+                <div>
+                  <select class="form-control" required id="input-gioitinh" style="margin-left: 78px ;width: 420px;">
+                    <option>--Chọn giới tính--</option>
+                    <option>Nam</option>
+                    <option>Nữ</option>
+                  </select>
+                  <div id="errorGioitinh" class="abc text-danger"></div>
+                </div>
+              </div>
+
+
+          </div>
+          <div>
+            <div class="button-container" style="text-align: right; margin-top: 20px;">
+              <button class="btn btn-save" style="margin-right: 0; background-color: #A6ECAB;" type="button"
+                onclick="return checkAll()">
+                Lưu lại
+              </button>
+              <a class="btn btn-cancel " style="margin-right: 3px;margin-left: 20px;background-color: #FFC5C5;"
+                href="table-data-khach.html">Hủy
+                bỏ</a>
+            </div>
+          </div>
+        </div>
+        <div id="successMessage" class="success-message"></div>
+  </main>
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+  <!-- The javascript plugin to display page loading on top-->
+  <script src="js/plugins/pace.min.js"></script>
+
+  <script>
+    //let id = localStorage.getItem("selectedTourId");
+    // let tours = JSON.parse(localStorage.getItem("tours"));
+    //let tour = tours.find(item => item.ma == id);
+    var khachhangInfo = JSON.parse(localStorage.getItem("selectedKhachhang"));
+    if (khachhangInfo) {
+      console.log(khachhangInfo);
+      document.getElementById("input-ma").value = khachhangInfo.ma;
+      document.getElementById("input-ten").value = khachhangInfo.ten;
+      document.getElementById("input-diachi").value = khachhangInfo.diachi;
+      document.getElementById("input-ngaysinh").value = khachhangInfo.ngaysinh;
+      document.getElementById("input-gioitinh").value = khachhangInfo.gioitinh;
+      document.getElementById("input-mail").value = khachhangInfo.mail;
+      document.getElementById("input-sdt").value = khachhangInfo.sdt;
+    }
+    //var khachhangInfo = JSON.parse(localStorage.getItem("selectedTour"));
+
+
+    //Sự kiện khi ấn nút save
+    function checkAll() {
+      let ma = document.getElementById('input-ma').value;
+      let ten = document.getElementById('input-ten').value;
+      let diachi = document.getElementById('input-diachi').value;
+      let ngaysinh = document.getElementById('input-ngaysinh').value;
+      let gioitinh = document.getElementById('input-gioitinh').value;
+      let mail = document.getElementById('input-mail').value;
+      let sdt = document.getElementById('input-sdt').value;
+      let isError = false;
+      if (ma.trim() === '') {
+        document.getElementById('errorMa').innerHTML = 'Mã không được để trống.';
+        isError = true;
+      } else {
+        document.getElementById('errorMa').innerHTML = '';
+      }
+
+      if (ten.trim() === '') {
+        document.getElementById('errorTen').innerHTML = 'Tên khách hàng không được để trống.';
+        isError = true;
+      } else {
+        document.getElementById('errorTen').innerHTML = '';
+      }
+
+      if (mail.trim() === '') {
+        document.getElementById('errorMail').innerHTML = 'Email không được để trống.';
+        isError = true;
+      }
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) {
+        document.getElementById('errorMail').innerHTML = 'Nhập sai định dạng thông tin <br>';
+        return false;
+      }
+      else {
+        document.getElementById('errorMail').innerHTML = '';
+      }
+
+      if (diachi.trim() === '') {
+        document.getElementById('errorDiachi').innerHTML = 'Địa chỉ không được để trống.';
+        isError = true;
+      } else {
+        document.getElementById('errorDiachi').innerHTML = '';
+      }
+
+      if (sdt.trim() === '') {
+        document.getElementById('errorSDT').innerHTML = 'Số điện thoại không được để trống.';
+        isError = true;
+      } else if (!/^\d{10}$/.test(sdt)) {
+        document.getElementById('errorSDT').innerHTML = 'Nhập sai định dạng thông tin <br>';
+        return false;
+      }
+      else {
+        document.getElementById('errorSDT').innerHTML = '';
+      }
+      if (ngaysinh.trim() === '') {
+        document.getElementById('errorNgaysinh').innerHTML = 'Ngày sinh không được để trống.';
+        isError = true;
+      } else {
+        document.getElementById('errorNgaysinh').innerHTML = '';
+      }
+      if (gioitinh.trim() === '--Chọn giới tính--') {
+        document.getElementById('errorGioitinh').innerHTML = 'Giới tính không được để trống.';
+        isError = true;
+      }
+      else {
+        document.getElementById('errorGioitinh').innerHTML = '';
+      }
+
+      if (isError) {
+        return false;
+      }
+
+
+      khachhangInfo.ma = ma;
+      khachhangInfo.ten = ten;
+      khachhangInfo.diachi = diachi;
+      khachhangInfo.ngaysinh = ngaysinh;
+      khachhangInfo.gioitinh = gioitinh;
+      khachhangInfo.mail = mail;
+      khachhangInfo.sdt = sdt;
+
+      var khachhangs = JSON.parse(localStorage.getItem('khachhangs')) || [];
+      for (var i = 0; i < khachhangs.length; i++) {
+        if (khachhangs[i].ma === khachhangInfo.ma) {
+          //  khachhangs[i].ma= khachhangInfo.ma;
+          khachhangs[i].ten = khachhangInfo.ten;
+          khachhangs[i].diachi = khachhangInfo.diachi;
+          khachhangs[i].ngaysinh = khachhangInfo.ngaysinh;
+          khachhangs[i].gioitinh = khachhangInfo.gioitinh;
+          khachhangs[i].mail = khachhangInfo.mail;
+          khachhangs[i].sdt = khachhangInfo.sdt;
+          break;
+        }
+      }
+
+      // localStorage.setItem('khachhangs', JSON.stringify(khachhangs));
+
+      // localStorage.setItem("selectedKhachhang", JSON.stringify(khachhangInfo));
+      // const successMessage = 'Bạn đã sửa khách hàng thành công';
+      // window.location.href = './table-data-khach.html?successMessage =${encodeURIComponent(successMessage)}';
+
+      // return true;
+
+      // Get the existing tours from local storage or create an empty array
+      // let khachhangs = JSON.parse(localStorage.getItem('khachhangs')) || [];
+
+      // Add the new tour information to the array of tours
+      localStorage.setItem('khachhangs', JSON.stringify(khachhangs));
+      localStorage.setItem('selectedKhachhang', JSON.stringify(khachhangInfo));
+      console.log('Thành công! Đã sửa khách hàng:', khachhangInfo);
+      localStorage.setItem('updateKH', JSON.stringify(1));
+      window.location.href = './table-data-khach.html';
+
+      return true;
+
+    }
+
+  </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Danh sách nhân viên | Quản trị Admin</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
+    <!-- or -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+    />
+    <!-- Font-icon css-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css"
+    />
+    <!-- Font-icon css-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Font-icon css-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css"
+    />
+  </head>
+  <style>
+      #sdt_right {
+        text-align: left;
+      }
+
+      #ma_right {
+        text-align: left;
+      }
+
+      .success-message {
+        position: fixed;
+        width: 290px;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px;
+        background-color: "#A6ECAB";
+        color: black;
+        font-weight: bold;
+        border-radius: 4px;
+        display: none;
+      }
+
+      #notifi-sucess {
+        background-color: "#A6ECAB";
+        position: fixed;
+        top: -60px;
+        transform: translateX(-50%);
+        color: black;
+        padding: 10px;
+        border: 4px;
+        transition: bottom 0.7s ease-in-out;
+        right: -114px;
+        z-index: 100;
+
+
+
+      }
+
+      #notifi-sucess.show {
+        top: 60px;
+
+      }
+
+      .hide {
+        transition: bottom 0.4s ease-in-out;
+        display: none;
+      }
+
+      #notifi-sucess1 {
+        background-color: #9df99d;
+        position: fixed;
+        top: -85px;
+        right: -114px;
+        transform: translateX(-50%);
+        color: black;
+        padding: 10px;
+        transition: bottom 0.7s ease-in-out;
+        z-index: 100;
+        width: 270px;
+      }
+
+      #notifi-sucess1.show {
+        top: 70px;
+      }
+
+      .hide {
+        transition: bottom 0.4s ease-in-out;
+        display: none;
+      }
+
+
+
+      .confirm-delete-row .swal2-confirm,
+      .confirm-delete-row .swal2-cancel {
+        font-size: 14px !important;
+      }
+
+      .success-sua {
+        position: fixed;
+        width: 250px;
+        top: 80px;
+        right: 20px;
+        padding: 10px;
+        background-color: #9df99d;
+        color: black;
+        border-radius: 4px;
+        display: none;
+        font-weight: bold;
+
+      }
+
+      .success-sua i {
+        margin-right: 10px;
+      }
+
+      #sampleTable.table {
+        margin-left: 0;
+      }
+
+      /* .swal2-confirm, .swal2-cancel {
+      font-size: 10px;
+    } */
+      .swal2-title {
+        text-align: left !important;
+        /* margin: 0 !important; */
+        padding: 0 !important;
+        color: black !important;
+        font-size: 24px !important;
+        font-weight: bold !important;
+        margin-bottom: 20px;
+        margin-top: 30px !important;
+      }
+
+      .swal2-container {
+        margin-right: auto !important;
+      }
+
+      .swal2-confirm {
+        color: black !important;
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+        /* font-size: 10px; */
+        width: 77px;
+        border-radius: .25em;
+        height: 36px;
+        background-color: #A6ECAB !important;
+      }
+
+      .swal2-cancel {
+        color: black !important;
+        border: none !important;
+        /* font-size:small; */
+        background-color: #FFC5C5 !important;
+        width: 77px !important;
+        border-radius: 2px;
+        height: 36px;
+      }
+
+      .swal2-confirm:not([class*="swal2-cancel"]) {
+        border: none !important;
+      }
+
+      .swal2-cancel {
+        right: 5px;
+        border: none !important;
+      }
+
+      .swal2-popup {
+        width: 400px !important;
+        height: 190px !important;
+      }
+
+      .swal2-popup .swal2-styled {
+        padding: 0px !important;
+        font-size: 14px !important;
+      }
+
+      button.swal2-close {
+        color: black !important;
+        font-weight: bold !important;
+
+
+      }
+
+      button.swal2-close:hover {
+        color: black !important;
+        font-weight: bold;
+        box-shadow: none !important;
+        outline: none !important;
+
+      }
+
+      /* .swal2-styled{
+        margin-right: 5px;
+        justify-content: flex-end ;
+        margin-top: 5px;
+      }
+      */
+      .swal2-popup .swal2-actions {
+        margin-right: 50px !important;
+        justify-content: flex-end;
+        margin-top: 25px !important;
+
+        /* .swal2-styled.swal2-cancel {
+        margin-left: auto;
+        border-radius: .25em;
+        background: initial;
+        background-color: #757575;
+        color: #fff;
+        font-size: 1em;
+    } */
+
+        .swal2-styled.swal2-confirm {
+          margin-left: auto;
+        }
+
+        .confirm-delete-row {
+          bottom: 0;
+          right: 0;
+        }
+
+        i.far.fa-question-circle {
+          opacity: 1;
+          color: black;
+        }
+
+        .app-menu__icon {
+          font-size: 23px;
+          -webkit-box-flex: 0;
+          -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+          width: 40px;
+          margin-right: 4px;
+        }
+
+        /* popup close  */
+
+        /*button.swal2-close:hover {
+        color: black !important;
+        font-weight: bold;
+        box-shadow: none !important;
+        outline: none !important;
+
+      }*/
+        element.style {
+          color: black;
+          font-size: 30px !important;
+          font-family: serif !important;
+        }
+  </style>
+
+  <body onload="time()" class="app sidebar-mini rtl">
+    <div
+      id="notifi-sucess"
+      class="alert alert-success"
+      style="margin-left: 1350px; width: 270px"
+    >
+      <i class="fa-solid fa-check" style="font-size: 21px"></i>
+      <strong>Thêm nhân viên thành công</strong>
+    </div>
+
+    <div id="notifi-sucess1" class="alert alert-success">
+      <i
+        class="fa-solid fa-check"
+        style="font-size: 18px; margin-right: 5px"
+      ></i>
+      <strong style="width: 270px; height: 52px"
+        >Sửa nhân viên thành công</strong
+      >
+    </div>
+
+    <!-- Navbar-->
+    <header class="app-header">
+      <!-- Sidebar toggle button--><a
+        class="app-sidebar__toggle"
+        href="#"
+        data-toggle="sidebar"
+        aria-label="Hide Sidebar"
+      ></a>
+      <!-- Navbar Right Menu-->
+      <ul class="app-nav">
+        <!-- User Menu-->
+        <li>
+          <a class="app-nav__item" href="/HTML/login.html"
+            ><i class="bx bx-log-out bx-rotate-180"></i>
+          </a>
+        </li>
+      </ul>
+    </header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+      <div class="app-sidebar__user">
+        <img
+          class="app-sidebar__user-avatar"
+          src="/images/LOGO.png"
+          width="50px"
+          alt="User Image"
+        />
+        <div>
+          <p class="app-sidebar__user-name"><b>HMU</b></p>
+          <p class="app-sidebar__user-designation">
+            Chào mừng bạn đến HMU Travel
+          </p>
+        </div>
+      </div>
+      <hr />
+      <ul class="app-menu">
+        <li>
+          <a class="app-menu__item active" href="table-data-table.html"
+            ><i class="app-menu__icon fa-solid fa-users"></i>
+            <span class="app-menu__label">Quản lý nhân viên</span></a
+          >
+        </li>
+        <!-- <i class='app-menu__icon bx bx-purchase-tag-alt'></i> -->
+        <li>
+          <a class="app-menu__item" href="table-data-product.html"
+            ><i class="app-menu__icon fa-solid fa-location-dot"></i>
+            <span class="app-menu__label">Quản lý tour</span></a
+          >
+        </li>
+
+        <li>
+          <a class="app-menu__item" href="quan-ly-bao-cao.html"
+            ><i class="app-menu__icon bx bx-pie-chart-alt-2"></i
+            ><span class="app-menu__label">Thống kê doanh thu</span></a
+          >
+        </li>
+      </ul>
+    </aside>
+    <main class="app-content">
+      <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb side">
+          <li class="breadcrumb-item active">
+            <a href="#"><b>Danh sách nhân viên</b></a>
+          </li>
+        </ul>
+        <div id="clock"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+              <div class="row element-button">
+                <div class="col-sm-2">
+                  <a
+                    class="btn btn-add btn-sm"
+                    href="form-add-nhan-vien.html"
+                    title="Thêm"
+                    ><i class="fas fa-plus"></i> Tạo mới nhân viên</a
+                  >
+                </div>
+              </div>
+              <table
+                class="table table-hover table-bordered js-copytextarea"
+                cellpadding="0"
+                cellspacing="0"
+                border="0"
+                id="sampleTable"
+              >
+                <thead>
+                  <tr>
+                    <th width="10"><input type="checkbox" id="all" /></th>
+                    <th style="text-align: center">Mã nhân viên</th>
+                    <th width="200" style="text-align: center">Họ và tên</th>
+                    <th style="text-align: center">Email</th>
+                    <th width="120" style="text-align: center">Địa chỉ</th>
+                    <th style="text-align: center">Ngày sinh</th>
+                    <th style="text-align: center">Giới tính</th>
+
+                    <th style="text-align: center">SĐT</th>
+                    <th style="text-align: center">Chức vụ</th>
+                    <th width="80" style="text-align: center">Tính năng</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="success-message" class="success-sua">
+        <i class="fa-solid fa-check"></i> Bạn đã sửa tour thành công
+      </div>
+    </main>
+
+    <!--
+  MODAL form sửa cũ 
+ 
+  MODAL
+-->
+
+    <!-- Essential javascripts for application to work-->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+    <!-- <script src="src/jquery.table2excel.js"></script> -->
+    <script src="js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.js"></script>
+
+    <!-- Data table plugin-->
+    <script
+      type="text/javascript"
+      src="js/plugins/jquery.dataTables.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/plugins/dataTables.bootstrap.min.js"
+    ></script>
+    <script>
+      //Thêm
+
+      //localStorage.clear();
+
+      let staffs = JSON.parse(localStorage.getItem("staffs")) || [];
+      if (staffs.length == 0) {
+        staffs.push({
+          ma: "NV1",
+          ten: "Đào Tuấn Anh",
+          mail: "tuananh@gmail.com",
+          diachi: "Hà Nội",
+          sdt: "0337223434",
+          ngaysinh: "1995-02-18",
+          gioitinh: "Nam",
+          chucvu: "Quản lý",
+        });
+
+        staffs.push({
+          ma: "NV2",
+          ten: "Tô Tùng Dương",
+          mail: "duongv4t@gmail.com",
+          diachi: "Hà Nội",
+          sdt: "0983546712",
+          ngaysinh: "1995-02-18",
+          gioitinh: "Nam",
+          chucvu: "Quản lý",
+        });
+
+        staffs.push({
+          ma: "NV3",
+          ten: "Phạm Hà Cẩm Ly",
+          mail: "ly@gmail.com",
+          diachi: "Hà Nội",
+          sdt: "0947385634",
+          ngaysinh: "1995-02-18",
+          gioitinh: "Nữ",
+          chucvu: "Quản lý",
+        });
+
+        staffs.push({
+          ma: "NV4",
+          ten: "Lê Thị Vui",
+          mail: "vui@gmail.com",
+          diachi: "Hà Nội",
+          sdt: "0956374853",
+          ngaysinh: "1995-02-18",
+          gioitinh: "Nữ",
+          chucvu: "Quản lý",
+        });
+
+        localStorage.setItem("staffs", JSON.stringify(staffs));
+      }
+      let tbodyElement = document.querySelector("#sampleTable tbody");
+      console.log(staffs);
+      let textHtml = ``;
+      for (let i = 0; i < staffs.length; i++) {
+        // for cũ dài ngoằng ngoằng quá copy text luôn cho nhanh :3
+        let text = `<tr>
+                  <td width="10"><input type="checkbox" name="check4" value="4"></td>
+                  <td id="ma_right">${staffs[i].ma}</td>
+                  <td>${staffs[i].ten}</td>
+                  <td>${staffs[i].mail}</td>
+
+                  <td>${staffs[i].diachi}</td>
+
+                  <td>${staffs[i].ngaysinh}</td>
+                  <td>${staffs[i].gioitinh}</td>
+                  
+                  <td id="sdt_right">${staffs[i].sdt}</td>
+                  <td>${staffs[i].chucvu}</td>
+                  <td style="text-align: center;" >
+                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"  data-ma="${staffs[i].ma}" data-ten="${staffs[i].ten}" data-mail="${staffs[i].mail}" data-gioitinh="${staffs[i].gioitinh}"
+                    data-sdt="${staffs[i].sdt}" data-diachi="${staffs[i].diachi}" data-ngaysinh="${staffs[i].ngaysinh}" data-chucvu="${staffs[i].chucvu}"> <a href="sua-nv.html">
+                      <i style="color: #F59D39;" class="fas fa-edit"></i></a>
+                  
+                    </button>
+                    <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" id="xoa" onclick="myFunction()">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>`;
+        textHtml += text;
+      }
+      tbodyElement.innerHTML = tbodyElement.innerHTML + textHtml;
+
+      let successMessage = localStorage.getItem("addNV");
+
+      console.log(successMessage);
+      if (successMessage == 1) {
+        let notification = document.getElementById("notifi-sucess");
+        notification.classList.add("show");
+        notification.classList.remove("hide");
+        setTimeout(function () {
+          let notification = document.getElementById("notifi-sucess");
+          notification.classList.remove("show");
+          setTimeout(function () {
+            let notification = document.getElementById("notifi-sucess");
+            notification.classList.add("hide");
+          }, 1000);
+        }, 3000);
+        localStorage.setItem("addNV", JSON.stringify(0));
+      }
+      let successMessage1 = localStorage.getItem("updateNV");
+
+      console.log(successMessage1);
+      if (successMessage1 == 1) {
+        let notification = document.getElementById("notifi-sucess1");
+        notification.classList.add("show");
+        notification.classList.remove("hide");
+        setTimeout(function () {
+          let notification = document.getElementById("notifi-sucess1");
+          notification.classList.remove("show");
+          setTimeout(function () {
+            let notification = document.getElementById("notifi-sucess1");
+            notification.classList.add("hide");
+          }, 1000);
+        }, 3000);
+        localStorage.setItem("updateNV", JSON.stringify(0));
+      }
+
+      // // Xóa giá trị thông báo từ localStorage
+      // localStorage.removeItem('success');
+
+      // //Modal
+      $("#show-emp").on("click", function () {
+        $("#ModalUP").modal({ backdrop: false, keyboard: false });
+      });
+    </script>
+    <script>
+      function confirmDeleteRow(row) {
+        swal
+          .fire({
+            title: "THÔNG BÁO",
+            html: '<i class="far fa-question-circle" style="color: black; margin-right:5px"></i> <span style="color:black; font-size: 14px; font-family: Roboto; font-weight: 400; margin-top:35px">Bạn có chắc chắn là muốn xóa nhân viên này?</span>',
+            showCloseButton: true,
+            showCancelButton: true,
+            confirmButtonColor: "#9df99d",
+            cancelButtonColor: "#FFC5C5",
+            confirmButtonText: "Đồng ý",
+            cancelButtonText: "Hủy bỏ",
+            // icon: "warning",
+            reverseButtons: false,
+            closeOnClickOutside: false,
+            customClass: "confirm-delete-row",
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              deleteRow(row);
+            }
+          });
+      }
+
+      function deleteRow(row) {
+        var i = row.parentNode.parentNode.rowIndex;
+        staffs.splice(i - 1, 1);
+        localStorage.setItem("staffs", JSON.stringify(staffs));
+        document.getElementById("sampleTable").deleteRow(i);
+
+        // display success message
+        var successMessage = document.createElement("div");
+        // successMessage.style.texticon = <span class="material - symbols - outlined">
+        //   done
+        // </span >
+        successMessage.innerHTML =
+          '<i class="fa-solid fa-check" style="color: black; margin-right:5px; font-size: 20px;"></i> Xóa nhân viên thành công';
+        successMessage.style.position = "fixed";
+        // successMessage.style.top = "50%";
+        // successMessage.style.left = "50%";
+        successMessage.style.left = "1320px";
+        successMessage.style.top = "90px";
+        successMessage.style.width = "270px";
+        successMessage.style.height = "45px";
+        successMessage.style.transform = "translate(-50%, -50%)";
+        successMessage.style.padding = "13px 19px";
+        successMessage.style.backgroundColor = "#9df99d";
+        successMessage.style.color = "#000000";
+        successMessage.style.fontWeight = "bold";
+        successMessage.style.border = "5px";
+        successMessage.style.borderRadius = "7px";
+        document.body.appendChild(successMessage);
+        setTimeout(function () {
+          document.body.removeChild(successMessage);
+        }, 3000);
+      }
+
+      jQuery(function () {
+        jQuery(".trash").click(function () {
+          confirmDeleteRow(this);
+        });
+      });
+
+      // -----
+
+      // ----
+      //Sự kiện khi ấn nút sửa 00000000000000000000000000000
+
+      //Thời Gian
+      function time() {
+        var today = new Date();
+        var weekday = new Array(7);
+        weekday[0] = "Chủ Nhật";
+        weekday[1] = "Thứ Hai";
+        weekday[2] = "Thứ Ba";
+        weekday[3] = "Thứ Tư";
+        weekday[4] = "Thứ Năm";
+        weekday[5] = "Thứ Sáu";
+        weekday[6] = "Thứ Bảy";
+        var day = weekday[today.getDay()];
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        nowTime = h + " giờ " + m + " phút " + s + " giây";
+        if (dd < 10) {
+          dd = "0" + dd;
+        }
+        if (mm < 10) {
+          mm = "0" + mm;
+        }
+        today = day + ", " + dd + "/" + mm + "/" + yyyy;
+        tmp = '<span class="date"> ' + today + " - " + nowTime + "</span>";
+        document.getElementById("clock").innerHTML = tmp;
+        clocktime = setTimeout("time()", "1000", "Javascript");
+
+        function checkTime(i) {
+          if (i < 10) {
+            i = "0" + i;
+          }
+          return i;
+        }
+      }
+      // In dữ liệu
+      var myApp = new (function () {
+        this.printTable = function () {
+          var tab = document.getElementById("sampleTable");
+          var win = window.open("", "", "height=700,width=700");
+          win.document.write(tab.outerHTML);
+          win.document.close();
+          win.print();
+        };
+      })();
+
+      //Modal
+      // $("#show-emp").on("click", function () {
+      //   $("#ModalUP").modal({ backdrop: false, keyboard: false })
+      // });
+      var a = $("#sampleTable").DataTable({
+        columnDefs: [
+          { targets: [2], searchable: true },
+          { targets: [0], searchable: false },
+          { targets: [1], searchable: true },
+          { targets: [3], searchable: false },
+          { targets: [4], searchable: false },
+          { targets: [5], searchable: false },
+          { targets: [6], searchable: true },
+          { targets: [7], searchable: false },
+        ],
+      });
+
+      $(".edit").click(function () {
+        var staffInfo = {
+          ma: $(this).data("ma"),
+          ten: $(this).data("ten"),
+          diachi: $(this).data("diachi"),
+          ngaysinh: $(this).data("ngaysinh"),
+          gioitinh: $(this).data("gioitinh"),
+          mail: $(this).data("mail"),
+          sdt: $(this).data("sdt"),
+          chucvu: $(this).data("chucvu"),
+        };
+        console.log(staffInfo);
+        localStorage.setItem("selectedStaff", JSON.stringify(staffInfo));
+        location.href = "./sua-nv.html";
+      });
+    </script>
+  </body>
+</html>
